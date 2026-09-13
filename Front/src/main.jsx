@@ -9,6 +9,7 @@ import {
   CreditCard,
   FlaskConical,
   Gem,
+  Gift,
   History,
   KeyRound,
   Lock,
@@ -42,6 +43,7 @@ import "./index.css";
 
 const caseTypes = [
   { id: "all", label: "Усі", helper: "Весь пул" },
+  { id: "free", label: "Безкоштовний", helper: "Стартовий кейс" },
   { id: "default", label: "Дефолтні", helper: "Базові дропи" },
   { id: "tactical", label: "Тактичні", helper: "Стабільний ризик" },
   { id: "premium", label: "Преміум", helper: "Вищий шанс" },
@@ -240,8 +242,8 @@ const cases = [
     drops: buildCaseDrops(["Tec-9 | Fuel Injector", "M4A1-S | Decimator", "AK-47 | Neon Rider"], [premiumDropPool, tacticalDropPool, defaultDropPool], 26),
   },
   {
-    id: "carbon-elite",
-    name: "Carbon Elite",
+    id: "bat-elite",
+    name: "Bat Elite",
     type: "premium",
     code: "CE-115",
     price: 150,
@@ -290,8 +292,8 @@ const cases = [
     drops: buildCaseDrops(["M4A4 | Howl", "AWP | Dragon Lore", "Talon Knife | Marble Fade"], [mythicDropPool, premiumDropPool, tacticalDropPool], 28),
   },
   {
-    id: "stellar-vault",
-    name: "Stellar Vault",
+    id: "stellar-case",
+    name: "Stellar Case",
     type: "mythic",
     code: "MY-027",
     price: 225,
@@ -483,6 +485,19 @@ function getWeaponName(name) {
   return name.replace(/^★\s*/, "").split(" | ")[0];
 }
 
+function previewItemFromName(name) {
+  const base = getSkinInfo(name);
+
+  return {
+    id: `preview-${name}`,
+    name,
+    weapon: getWeaponName(name),
+    rarity: base.rarity,
+    price: base.price,
+    wear: "",
+  };
+}
+
 function pickWeightedDrop(crate) {
   const pool = crate.drops.map((name) => {
     const item = getSkinInfo(name);
@@ -508,10 +523,7 @@ function pickWeightedDrop(crate) {
 function calculateUpgradeChance(item, target) {
   if (!item || !target) return 0;
 
-  const ratio = item.price / Math.max(target.price, 1);
-  const targetPenalty = target.price >= 900 ? 0.6 : target.price >= 500 ? 0.72 : target.price >= 300 ? 0.84 : 1;
-
-  return Math.max(2, Math.min(74, Math.round(ratio * 68 * targetPenalty)));
+  return Math.max(1, Math.min(95, Math.round((item.price / Math.max(target.price, 1)) * 100)));
 }
 
 function itemFromName(name, cratePrice = 0) {
@@ -529,7 +541,7 @@ function itemFromName(name, cratePrice = 0) {
 }
 
 function App() {
-  const [activeView, setActiveView] = useState("auth");
+  const [activeView, setActiveView] = useState("cases");
   const [activeType, setActiveType] = useState("all");
   const [inventory, setInventory] = useState([]);
   const [balance, setBalance] = useState(30);
@@ -551,13 +563,18 @@ function App() {
   const [sortBy, setSortBy] = useState("name");
   const [editingCase, setEditingCase] = useState(null);
   const [isOpening, setIsOpening] = useState(false);
+  const [rollingItems, setRollingItems] = useState([]);
+  const [upgradeMultiplier, setUpgradeMultiplier] = useState(2);
+  const [openCount, setOpenCount] = useState(1);
   const [users, setUsers] = useState([
     { id: 1, steamId: "76561199584721642", nickname: "Arsenii", balance: 30, connectedAt: new Date().toISOString() },
   ]);
 
+  const caseGroupKey = (item) => (item.price === 0 ? "free" : item.type);
+
   const filteredCases = useMemo(() => {
     if (activeType === "all") return cases;
-    return cases.filter((item) => item.type === activeType);
+    return cases.filter((item) => caseGroupKey(item) === activeType);
   }, [activeType]);
 
   const groupedCases = useMemo(() => {
@@ -565,44 +582,71 @@ function App() {
       .filter((type) => type.id !== "all")
       .map((type) => ({
         ...type,
-        cases: cases.filter((item) => item.type === type.id),
+        cases: cases.filter((item) => caseGroupKey(item) === type.id),
       }));
   }, []);
+
+  const upgradeTargets = useMemo(() => {
+    if (!selectedItem) return targets;
+    const wanted = selectedItem.price * upgradeMultiplier;
+    const pool = Object.entries(skinCatalog)
+      .filter(([name]) => name !== selectedItem.name)
+      .map(([name, info]) => ({ name, rarity: info.rarity, price: info.price }))
+      .filter((entry) => entry.price >= wanted * 0.7 && entry.price <= wanted * 1.5)
+      .sort((a, b) => Math.abs(a.price - wanted) - Math.abs(b.price - wanted))
+      .slice(0, 8);
+
+    return pool.length ? pool : targets;
+  }, [selectedItem, upgradeMultiplier]);
+
+  useEffect(() => {
+    if (upgradeTargets.length && !upgradeTargets.some((target) => target.name === selectedTarget?.name)) {
+      setSelectedTarget(upgradeTargets[0]);
+    }
+  }, [upgradeTargets, selectedTarget]);
 
   const viewCase = (crate = selectedCase) => {
     if (isOpening) return;
     setSelectedCase(crate);
-    setOpenResult({ crate, item: null, error: "" });
+    setOpenCount(1);
+    setOpenResult({ crate, item: null, items: [], error: "" });
     setUpgradeResult(null);
     setActiveView("opening");
   };
 
-  const openCase = (crate = selectedCase) => {
+  const openCase = (crate = selectedCase, count = openCount) => {
     if (isOpening) return;
 
-    if (balance < crate.price) {
-      setOpenResult({ crate, item: null, error: "Недостатньо кредитів для відкриття цього кейса." });
+    const amount = Math.max(1, count);
+    const cost = crate.price * amount;
+
+    if (balance < cost) {
+      setOpenResult({ crate, item: null, items: [], error: `Недостатньо кредитів для відкриття ${amount > 1 ? `${amount} кейсів` : "цього кейса"}.` });
       return;
     }
 
+    const rolledItems = Array.from({ length: amount }, () => {
+      let dropItem = itemFromName(pickWeightedDrop(crate), crate.price);
+      if (crate.id === "starter-free" && dropItem.price < 30) {
+        dropItem = { ...dropItem, price: 30 };
+      }
+      return dropItem;
+    });
+    const bestItem = rolledItems.reduce((best, entry) => (entry.price > best.price ? entry : best), rolledItems[0]);
+
     setIsOpening(true);
-    setBalance((value) => value - crate.price);
+    setBalance((value) => value - cost);
+    setRollingItems(rolledItems);
 
     window.setTimeout(() => {
-      const name = pickWeightedDrop(crate);
-      let item = itemFromName(name, crate.price);
-
-      if (crate.id === "starter-free" && item.price < 30) {
-        item = { ...item, price: 30 };
-      }
-
-      setLastDrop(item);
-      setInventory((items) => [item, ...items].slice(0, 16));
-      setSelectedItem(item);
-      setOpenResult({ crate, item, error: "" });
+      setLastDrop(bestItem);
+      setInventory((items) => [...rolledItems, ...items].slice(0, 16));
+      setSelectedItem(bestItem);
+      setOpenResult({ crate, item: bestItem, items: rolledItems, error: "" });
       setUpgradeResult(null);
       setIsOpening(false);
-    }, 1500);
+      setRollingItems([]);
+    }, 3200 + (amount - 1) * 150);
   };
 
   const upgradeChance = calculateUpgradeChance(selectedItem, selectedTarget);
@@ -654,7 +698,7 @@ function App() {
       setLastDrop(won ? resultItem : lastDrop);
       setUpgradeResult({ won, input: inputItem, target: resultItem, chance, roll });
       setIsUpgrading(false);
-    }, 1450);
+    }, 2800);
   };
 
   const connectSteam = () => {
@@ -765,7 +809,9 @@ function App() {
         {activeView === "opening" && (
           <OpeningView
             balance={balance}
-            onOpen={() => openResult?.crate && openCase(openResult.crate)}
+            count={openCount}
+            onSelectCount={setOpenCount}
+            onOpen={() => openResult?.crate && openCase(openResult.crate, openCount)}
             onAgain={() => viewCase(openResult?.crate || selectedCase)}
             onBack={() => setActiveView("cases")}
             onKeep={() => setActiveView("inventory")}
@@ -773,12 +819,24 @@ function App() {
               quickSell(item);
               setOpenResult((result) => ({ ...result, item: { ...item, sold: true } }));
             }}
+            onSellAll={(items) => {
+              const soldIds = new Set(items.map((entry) => entry.id));
+              setBalance((value) => value + items.reduce((sum, entry) => sum + entry.price, 0));
+              setInventory((current) => current.filter((entry) => !soldIds.has(entry.id)));
+              if (selectedItem && soldIds.has(selectedItem.id)) setSelectedItem(null);
+              setOpenResult((result) => ({
+                ...result,
+                soldAll: true,
+                items: result.items.map((entry) => ({ ...entry, sold: true })),
+              }));
+            }}
             result={openResult}
             isOpening={isOpening}
+            rollingItems={rollingItems}
           />
         )}
         {activeView === "vault" && (
-          <VaultView balance={balance} lastDrop={lastDrop} onOpen={() => viewCase(selectedCase)} selectedCase={selectedCase} />
+          <VaultView balance={balance} dropsCount={inventory.length} lastDrop={lastDrop} onOpen={() => viewCase(selectedCase)} selectedCase={selectedCase} />
         )}
         {activeView === "upgrade" && (
           <UpgradeView
@@ -786,12 +844,15 @@ function App() {
             item={selectedItem}
             inventory={inventory}
             isUpgrading={isUpgrading}
+            multiplier={upgradeMultiplier}
             onSelectItem={setSelectedItem}
+            onSelectMultiplier={setUpgradeMultiplier}
             onSelectTarget={setSelectedTarget}
             onUpgrade={runUpgrade}
             result={upgradeResult}
             roll={upgradeRoll}
             selectedTarget={selectedTarget}
+            targetOptions={upgradeTargets}
           />
         )}
         {activeView === "inventory" && (
@@ -846,16 +907,20 @@ function App() {
 function CasesView({ activeType, filteredCases, groupedCases, onOpen, onSelect, selectedCase, setActiveType }) {
   return (
     <section className="screen cases-screen">
+      <div className="free-drop-banner">
+        <Gift size={18} />
+        <span>
+          Для нових користувачів — <b>1 безкоштовне відкриття</b> кейса Starter Case
+        </span>
+      </div>
+
       <div className="hero-band">
         <div className="hero-copy">
-          <span className="eyebrow">CS cases vault · tactical unboxing protocol</span>
+          <span className="eyebrow">CS cases · tactical unboxing protocol</span>
           <h1>
-            CARBON
-            <span>VAULT</span>
+            BAT
+            <span>CASE</span>
           </h1>
-          <p>
-            Фановий frontend для відкриття кейсів, синтезу предметів та інвентаря. Класифікація кейсів розділена за типами: від дефолтних до міфічних.
-          </p>
           <div className="hero-stats">
             <span>16 cases</span>
             <span>{totalSkinCount} skins</span>
@@ -921,7 +986,7 @@ function FeaturedCase({ crate, onOpen }) {
       </div>
       <CrateArt accent={crate.accent} variant={crate.type} />
       <h3>{crate.name}</h3>
-      <p>{crate.drops.length} skins · {crate.volatility} volatility · {caseTypes.find((type) => type.id === crate.type)?.label}</p>
+      <p>{crate.drops.length} skins · {crate.volatility} volatility · {caseTypes.find((type) => type.id === (crate.price === 0 ? "free" : crate.type))?.label}</p>
       <button className="primary-action" onClick={onOpen} type="button">
         <PackageOpen size={16} />
         Open selected
@@ -955,7 +1020,7 @@ function CaseCard({ crate, onOpen, onSelect, selected }) {
   );
 }
 
-function OpeningView({ balance, onOpen, onAgain, onBack, onKeep, onSell, result, isOpening }) {
+function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelectCount, onSell, onSellAll, result, isOpening, rollingItems }) {
   const crate = result?.crate || cases[0];
   const item = result?.item;
   const [showResult, setShowResult] = useState(false);
@@ -998,36 +1063,153 @@ function OpeningView({ balance, onOpen, onAgain, onBack, onKeep, onSell, result,
         </div>
 
         <div className="opening-case-display">
-          <CrateArt accent={crate.accent} variant={crate.type} className={isOpening || item ? "opened" : ""} />
-          {!item && (
-            <button className="primary-action wide open-case-button" disabled={isOpening} onClick={onOpen} type="button">
-              <PackageOpen size={16} />
-              {isOpening ? "Відкриття..." : `Відкрити за ${crate.price ? `${crate.price} cr` : "безкоштовно"}`}
-            </button>
+          {!isOpening && !item && (
+            <>
+              <CrateArt accent={crate.accent} variant={crate.type} />
+              <div className="multiplier-tabs">
+                {[1, 2, 3, 5].map((value) => (
+                  <button
+                    className={count === value ? "multiplier-tab active" : "multiplier-tab"}
+                    key={value}
+                    onClick={() => onSelectCount(value)}
+                    type="button"
+                  >
+                    x{value}
+                  </button>
+                ))}
+              </div>
+              <button className="primary-action wide open-case-button" onClick={onOpen} type="button">
+                <PackageOpen size={16} />
+                {crate.price
+                  ? `Відкрити${count > 1 ? ` x${count}` : ""} за ${crate.price * count} cr`
+                  : "Відкрити безкоштовно"}
+              </button>
+            </>
+          )}
+          {isOpening && rollingItems.length > 0 && (
+            <div className="case-scroll-stack">
+              {rollingItems.map((drop, index) => (
+                <CaseScroll crate={crate} delay={index * 150} finalItem={drop} key={drop.id} />
+              ))}
+            </div>
           )}
         </div>
 
         {item && showResult && (
           <div className="opening-result-reveal">
-            <ItemShowcase item={item} large />
-            <div className="drop-actions">
-              <button className="primary-action" disabled={item?.sold} onClick={onKeep} type="button">
-                <ShoppingBag size={16} />
-                {item?.sold ? "Продано" : "Залишити"}
-              </button>
-              <button className="sell-button result-sell" disabled={item?.sold} onClick={() => onSell(item)} type="button">
-                <CircleDollarSign size={15} />
-                Продати · {item?.price || 0} cr
-              </button>
-              <button className="ghost-action" onClick={onAgain} type="button">
-                <RefreshCw size={15} />
-                Ще раз
-              </button>
-            </div>
+            {result.items?.length > 1 ? (
+              <>
+                <div className="multi-drop-grid">
+                  {result.items.map((drop) => (
+                    <div
+                      className={drop.sold ? "multi-drop-item sold" : "multi-drop-item"}
+                      key={drop.id}
+                      style={{ "--rarity": rarityMeta[drop.rarity].color }}
+                    >
+                      <WeaponMark item={drop} compact />
+                      <span>{drop.name}</span>
+                      <b>{drop.price} cr</b>
+                    </div>
+                  ))}
+                </div>
+                <p className="multi-drop-total">
+                  Разом: <b>{result.items.reduce((sum, entry) => sum + entry.price, 0)} cr</b>
+                </p>
+                <div className="drop-actions">
+                  <button className="primary-action" disabled={result.soldAll} onClick={onKeep} type="button">
+                    <ShoppingBag size={17} />
+                    {result.soldAll ? "Продано" : "Залишити все"}
+                  </button>
+                  <button className="result-sell" disabled={result.soldAll} onClick={() => onSellAll(result.items)} type="button">
+                    <CircleDollarSign size={17} />
+                    Продати все
+                    <b>{result.items.reduce((sum, entry) => sum + entry.price, 0)} cr</b>
+                  </button>
+                  <button className="ghost-action" onClick={onAgain} type="button">
+                    <RefreshCw size={17} />
+                    Ще раз
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <ItemShowcase item={item} large />
+                <div className="drop-actions">
+                  <button className="primary-action" disabled={item?.sold} onClick={onKeep} type="button">
+                    <ShoppingBag size={17} />
+                    {item?.sold ? "Продано" : "Залишити"}
+                  </button>
+                  <button className="result-sell" disabled={item?.sold} onClick={() => onSell(item)} type="button">
+                    <CircleDollarSign size={17} />
+                    Продати
+                    <b>{item?.price || 0} cr</b>
+                  </button>
+                  <button className="ghost-action" onClick={onAgain} type="button">
+                    <RefreshCw size={17} />
+                    Ще раз
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         )}
       </div>
     </section>
+  );
+}
+
+const SCROLL_CARD_WIDTH = 110;
+const SCROLL_CARD_GAP = 12;
+const SCROLL_LEAD_ITEMS = 34;
+const SCROLL_TRAIL_ITEMS = 6;
+const SCROLL_DURATION_MS = 3000;
+
+function CaseScroll({ crate, delay = 0, finalItem }) {
+  const { rollItems, landingX } = useMemo(() => {
+    const pool = crate.drops.length ? crate.drops : ["P2000 | Granite Marbleized"];
+    const lead = Array.from({ length: SCROLL_LEAD_ITEMS }, () =>
+      previewItemFromName(pool[Math.floor(Math.random() * pool.length)])
+    );
+    const trail = Array.from({ length: SCROLL_TRAIL_ITEMS }, () =>
+      previewItemFromName(pool[Math.floor(Math.random() * pool.length)])
+    );
+    const items = [...lead, finalItem, ...trail];
+    const finalIndex = lead.length;
+    const cardCenter = finalIndex * (SCROLL_CARD_WIDTH + SCROLL_CARD_GAP) + SCROLL_CARD_WIDTH / 2;
+    const jitter = (Math.random() * 2 - 1) * (SCROLL_CARD_WIDTH / 2 - 16);
+
+    return { rollItems: items, landingX: -(cardCenter + jitter) };
+  }, [crate, finalItem]);
+
+  const [offset, setOffset] = useState(-370);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => setOffset(landingX));
+      });
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [landingX, delay]);
+
+  return (
+    <div className="case-scroll">
+      <div className="scroll-marker" />
+      <div
+        className="scroll-track"
+        style={{
+          transform: `translateX(${offset}px)`,
+          transition: `transform ${SCROLL_DURATION_MS}ms cubic-bezier(.12, .78, .12, 1)`,
+        }}
+      >
+        {rollItems.map((rollItem, index) => (
+          <div className="scroll-card" key={`${rollItem.name}-${index}`}>
+            <WeaponMark item={rollItem} compact />
+            <span>{rollItem.name}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -1051,14 +1233,22 @@ function CrateArt({ accent, variant, className = "" }) {
   );
 }
 
-function VaultView({ balance, lastDrop, onOpen, selectedCase }) {
+function VaultView({ balance, dropsCount, lastDrop, onOpen, selectedCase }) {
   return (
     <section className="screen vault-screen">
       <div className="vault-layout">
         <div className="vault-main">
           <span className="eyebrow">Vault terminal</span>
           <h2>Останній дроп</h2>
-          <ItemShowcase item={lastDrop} large />
+          {lastDrop ? (
+            <ItemShowcase item={lastDrop} large />
+          ) : (
+            <EmptyState
+              icon={PackageOpen}
+              title="Ще нічого не випало"
+              text="Відкрий кейс — тут з'явиться твій перший дроп."
+            />
+          )}
           <button className="primary-action wide" onClick={onOpen} type="button">
             <RefreshCw size={16} />
             Відкрити {selectedCase.name}
@@ -1067,16 +1257,56 @@ function VaultView({ balance, lastDrop, onOpen, selectedCase }) {
         <div className="summary-grid">
           <MetricCard icon={Vault} label="Balance" value={`${balance} cr`} />
           <MetricCard icon={PackageOpen} label="Case now" value={selectedCase.name} />
-          <MetricCard icon={Sparkles} label="Last rarity" value={rarityMeta[lastDrop.rarity].label} />
-          <MetricCard icon={History} label="Session" value="8 drops" />
+          <MetricCard icon={Sparkles} label="Last rarity" value={lastDrop ? rarityMeta[lastDrop.rarity].label : "—"} />
+          <MetricCard icon={History} label="Session" value={`${dropsCount} drops`} />
         </div>
       </div>
     </section>
   );
 }
 
-function UpgradeView({ chance, isUpgrading, item, inventory, onSelectItem, onSelectTarget, onUpgrade, result, roll, selectedTarget }) {
-  const rollPosition = roll ? Math.min(100, Math.max(0, roll.roll)) : chance;
+function UpgradeWheel({ chance, roll }) {
+  const [angle, setAngle] = useState(0);
+
+  useEffect(() => {
+    if (!roll) return;
+    setAngle((prev) => {
+      const current = ((prev % 360) + 360) % 360;
+      const target = (((360 - roll.roll * 3.6) % 360) + 360) % 360;
+      const delta = (((target - current) % 360) + 360) % 360;
+      return prev + 360 * 4 + delta;
+    });
+  }, [roll]);
+
+  return (
+    <div className="upgrade-wheel">
+      <span className="wheel-pointer" />
+      <div
+        className="wheel-disc"
+        style={{ "--chance": `${chance}%`, transform: `rotate(${angle}deg)` }}
+      >
+        <span className="wheel-ticks" />
+      </div>
+      <div className="wheel-hub">
+        <b>{chance}%</b>
+        <small>шанс</small>
+      </div>
+    </div>
+  );
+}
+
+function SkinPickRow({ active, entry, onSelect }) {
+  return (
+    <button className={active ? "pick-row active" : "pick-row"} onClick={() => onSelect(entry)} type="button">
+      <WeaponMark item={entry} compact />
+      <span className="pick-row-name">{entry.name}</span>
+      <b>{entry.price} cr</b>
+    </button>
+  );
+}
+
+function UpgradeView({ chance, isUpgrading, item, inventory, multiplier, onSelectItem, onSelectMultiplier, onSelectTarget, onUpgrade, result, roll, selectedTarget, targetOptions }) {
+  const multipliers = [2, 5, 10];
 
   return (
     <section className="screen">
@@ -1084,7 +1314,7 @@ function UpgradeView({ chance, isUpgrading, item, inventory, onSelectItem, onSel
         <div>
           <span className="eyebrow">Sector 03</span>
           <h2>Synthesis Lab</h2>
-          <p className="subcopy">Обери дешевший предмет і ціль дорожче. Шанс формується тільки на frontend-даних.</p>
+          <p className="subcopy">Обери предмет з інвентаря, множник і ціль — колесо вирішить результат.</p>
         </div>
       </div>
       <div className="upgrade-grid">
@@ -1093,13 +1323,9 @@ function UpgradeView({ chance, isUpgrading, item, inventory, onSelectItem, onSel
           {item ? (
             <>
               <ItemShowcase item={item} />
-              <div className="compact-list">
+              <div className="pick-list">
                 {inventory.slice(0, 6).map((entry) => (
-                  <button className={entry.id === item.id ? "list-row active" : "list-row"} key={entry.id} onClick={() => onSelectItem(entry)} type="button">
-                    <RarityDot rarity={entry.rarity} />
-                    <span>{entry.name}</span>
-                    <b>{entry.price} cr</b>
-                  </button>
+                  <SkinPickRow active={entry.id === item.id} entry={entry} key={entry.id} onSelect={onSelectItem} />
                 ))}
               </div>
             </>
@@ -1108,33 +1334,37 @@ function UpgradeView({ chance, isUpgrading, item, inventory, onSelectItem, onSel
           )}
         </div>
         <div className="tool-panel center-panel">
-          <PanelTitle icon={Target} title="Probability core" />
-          <div className="chance-ring" style={{ "--chance": `${chance}%` }}>
-            <span>{chance}%</span>
-            <small>projected</small>
+          <PanelTitle icon={Target} title="Probability wheel" />
+          <div className="multiplier-tabs">
+            {multipliers.map((value) => (
+              <button
+                className={multiplier === value ? "multiplier-tab active" : "multiplier-tab"}
+                key={value}
+                onClick={() => onSelectMultiplier(value)}
+                type="button"
+              >
+                x{value}
+              </button>
+            ))}
           </div>
-          <div
-            className={isUpgrading ? "upgrade-roll rolling" : "upgrade-roll"}
-            style={{ "--chance": `${chance}%`, "--roll": `${rollPosition}%` }}
-          >
-            <span className="upgrade-win-zone" />
-            <span className="upgrade-loss-zone" />
-            <span className="upgrade-roll-marker" />
-          </div>
+          <UpgradeWheel chance={chance} roll={roll} />
           <p className="muted">
             {item ? `${item.price} cr → ${selectedTarget.price} cr` : "Потрібен предмет для апгрейду"}
           </p>
           <button className="primary-action wide" disabled={!item || isUpgrading} onClick={onUpgrade} type="button">
             <WandSparkles size={16} />
-            {isUpgrading ? "Rolling..." : "Start upgrade"}
+            {isUpgrading ? "Крутиться..." : "Start upgrade"}
           </button>
           {result && (
             <div className={result.won ? "upgrade-result won" : "upgrade-result lost"}>
-              <b>{result.won ? "Апгрейд успішний" : "Апгрейд не пройшов"}</b>
+              <b>
+                {result.won ? <Trophy size={16} /> : <AlertTriangle size={16} />}
+                {result.won ? "Вітаємо! Апгрейд успішний" : "Упс! Не пощастило"}
+              </b>
               <span>
                 {result.won
                   ? `${result.target.name} додано в інвентар`
-                  : `${result.input.name} витрачено`}
+                  : `${result.input.name} витрачено — спробуй ще раз!`}
               </span>
               <small>Шанс був {result.chance}% · roll {result.roll}</small>
             </div>
@@ -1152,18 +1382,14 @@ function UpgradeView({ chance, isUpgrading, item, inventory, onSelectItem, onSel
               wear: "Target item",
             }}
           />
-          <div className="compact-list target-list">
-            {targets.map((target) => (
-              <button
-                className={selectedTarget.name === target.name ? "list-row active" : "list-row"}
+          <div className="pick-list target-list">
+            {targetOptions.map((target) => (
+              <SkinPickRow
+                active={selectedTarget.name === target.name}
+                entry={target}
                 key={target.name}
-                onClick={() => onSelectTarget(target)}
-                type="button"
-              >
-                <RarityDot rarity={target.rarity} />
-                <span>{target.name}</span>
-                <b>{target.price} cr</b>
-              </button>
+                onSelect={onSelectTarget}
+              />
             ))}
           </div>
         </div>
@@ -1852,7 +2078,9 @@ function MetricCard({ icon: Icon, label, value }) {
 function EmptyState({ icon: Icon, title, text }) {
   return (
     <div className="empty-state">
-      <Icon size={28} />
+      <div className="empty-icon">
+        <Icon size={26} />
+      </div>
       <h3>{title}</h3>
       <p>{text}</p>
     </div>

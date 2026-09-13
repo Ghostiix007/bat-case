@@ -1,6 +1,6 @@
 import crypto from "node:crypto";
 
-const SESSION_COOKIE = "carbon_steam_session";
+const SESSION_COOKIE = "batcase_steam_session";
 const STEAM_OPENID_URL = "https://steamcommunity.com/openid/login";
 const STEAM_IDENTIFIER = "http://specs.openid.net/auth/2.0/identifier_select";
 const sessions = new Map();
@@ -157,7 +157,7 @@ async function fetchSteamProfile(steamId) {
 
 export function steamAuthPlugin() {
   return {
-    name: "carbon-vault-steam-auth",
+    name: "bat-case-steam-auth",
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const url = new URL(req.url || "/", getOrigin(req));
