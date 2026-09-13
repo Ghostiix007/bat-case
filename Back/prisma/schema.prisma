@@ -1,0 +1,116 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator erd {
+  provider = "prisma-erd-generator"
+  output   = "ERD.svg"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id       String  @id
+  username String
+  balance  Decimal @default(0.00) @db.Decimal(12, 2)
+  role     Role    @default(USER)
+
+  payments  Payment[]
+  inventory UserInventory[]
+  logs      Log[]
+
+  @@map("users")
+}
+
+model Collection {
+  id          String  @id @default(uuid())
+  name        String
+  imageUrl    String
+  description String?
+
+  cases        Case[]
+
+  @@map("collections")
+}
+
+model Case {
+  id           String  @id @default(uuid())
+  collectionId String? @map("collection_id")
+  name         String
+  price        Decimal @db.Decimal(10, 2)
+  imageUrl     String  @map("image_url")
+  description  String?
+  isActive     Boolean @default(true) @map("is_active")
+
+  collection Collection?     @relation(fields: [collectionId], references: [id])
+  caseSkins  CaseSkin[]
+
+  @@map("cases")
+}
+
+model Skin {
+  id       String  @id @default(uuid())
+  name     String
+  rarity   String
+  price    Decimal @db.Decimal(10, 2)
+  imageUrl String  @map("image_url")
+
+  caseSkins CaseSkin[]
+  inventory UserInventory[]
+
+  @@map("skins")
+}
+
+model CaseSkin {
+  id         String @id @default(uuid())
+  caseId     String @map("case_id")
+  skinId     String @map("skin_id")
+  dropChance Float  @map("drop_chance")
+
+  case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
+  skin Skin @relation(fields: [skinId], references: [id], onDelete: Cascade)
+
+  @@unique([caseId, skinId])
+  @@map("case_skins")
+}
+
+model UserInventory {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  skinId    String   @map("skin_id")
+
+  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skin Skin  @relation(fields: [skinId], references: [id], onDelete: Cascade)
+
+  @@map("user_inventory")
+}
+
+model Payment {
+  id     String  @id @default(uuid())
+  userId String  @map("user_id")
+  amount Decimal @db.Decimal(10, 2)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("payments")
+}
+
+model Log {
+  id        String   @id @default(uuid())
+  eventType String   @map("event_type")
+  userId    String?  @map("user_id")
+  payload   Json?
+  timestamp DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("logs")
+}
