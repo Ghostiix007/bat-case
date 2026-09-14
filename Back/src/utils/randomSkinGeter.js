@@ -13,5 +13,6 @@ function getRandomSkin(skins){
         }
         rand -= skin.drop_chance
     })
-
 }
+
+module.exports = {getRandomSkin}
