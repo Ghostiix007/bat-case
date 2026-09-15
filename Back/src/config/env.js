@@ -1,13 +1,16 @@
+const path = require("path")
+require("dotenv").config({ path: path.resolve(__dirname, "../../.env") })
+
 module.exports = {
-    PORT: 5000,
-    DATABASE_URL: "postgresql://postgres:1111@localhost:5432/batCaseDB?schema=public",
+    PORT: process.env.PORT,
+    DATABASE_URL: process.env.DATABASE_URL,
 
-    STEAM_API_KEY: "FBCEB2100C8E5AD1AFDF15AD212C60B2",
+    STEAM_API_KEY: process.env.STEAM_API_KEY,
 
-    JWT_SECRET: "bat_case_secret_jwt_key_2026",
+    JWT_SECRET: process.env.JWT_SECRET,
 
-    REALM: "http://localhost:5000/",
-    RETURN_URL: "http://localhost:5000/api/auth/steam/callback",
+    REALM: process.env.REALM,
+    RETURN_URL: process.env.RETURN_URL,
 
-    FRONTEND_URL: "frontend_url",
+    FRONTEND_URL: process.env.FRONTEND_URL,
 }

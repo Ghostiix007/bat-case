@@ -1,5 +1,5 @@
 node_modules/
-src/config/env.js
+.env
 dist/
 build/
 *.log

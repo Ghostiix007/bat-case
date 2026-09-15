@@ -1,21 +1,22 @@
 const express = require('express')
 const cors = require('cors')
-const prisma = require('./src/config/db')
-
+const cookieParser = require('cookie-parser')
+const passport = require('./src/config/passport.js')
+const config = require('./src/config/env.js')
 const app = express()
-const PORT = process.env.PORT
+const authRoutes = require('./src/routes/authRoutes.js')
 
-app.use(cors())
+
+const PORT = config.PORT
+
+app.use(cors({
+    origin: config.FRONTEND_URL,
+    credentials: true
+}))
 app.use(express.json())
-
-app.get('/api/health', async (req, res) => {
-    try {
-        await prisma.$queryRaw`SELECT 1`
-        res.json({ status: 'ok', message: 'BatCase API is running & DB is connected' })
-    } catch (error) {
-        res.status(500).json({ status: 'error', message: 'Database connection failed', error: error.message })
-    }
-})
+app.use(cookieParser())
+app.use(passport.initialize())
+app.use("/api/auth", authRoutes)
 
 app.listen(PORT, () => {
     console.log(`BatCase Server running on port ${PORT}\nOn address http://localhost:${PORT}`)
