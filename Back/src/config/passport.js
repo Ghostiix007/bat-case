@@ -1,10 +1,10 @@
-const passport = require('passport');
-const SteamStrategy = require('passport-steam').Strategy;
-const prisma = require('./db');
-const config = require('./env');
+const passport = require('passport')
+const SteamStrategy = require('passport-steam').Strategy
+const prisma = require('./db')
+const config = require('./env')
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.id)
 })
 
 passport.deserializeUser(async (id, done) => {
@@ -45,4 +45,4 @@ passport.use(new SteamStrategy(
     }
 ))
 
-module.exports = passport;
+module.exports = passport
