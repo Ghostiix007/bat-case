@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "test": "vitest run && playwright test",
     "test:api": "vitest run",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "lint": "echo \"No linter required for tests\""
   },
   "devDependencies": {
     "@playwright/test": "^1.63.0",

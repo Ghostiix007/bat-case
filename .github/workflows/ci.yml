@@ -1,0 +1,42 @@
+name: CI Workflow
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  aqa-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: 'AQA/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd AQA
+          npm ci
+
+      - name: Install Playwright Browsers
+        run: |
+          cd AQA
+          npx playwright install --with-deps chromium
+
+      - name: Run Linter
+        run: |
+          cd AQA
+          npm run lint
+
+      - name: Run AQA Tests
+        run: |
+          cd AQA
+          npm run test
