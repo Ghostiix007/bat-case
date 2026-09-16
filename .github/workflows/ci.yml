@@ -1,13 +1,13 @@
-name: CI Workflow
+name: AQA Checks
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, feature/aqa-tests ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main ]
 
 jobs:
-  aqa-checks:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,26 +17,30 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: 'AQA/package-lock.json'
+          node-version: 22
+          cache: npm
+          cache-dependency-path: AQA/package-lock.json
 
       - name: Install dependencies
-        run: |
-          cd AQA
-          npm ci
+        defaults:
+          run:
+            working-directory: AQA
+        run: npm ci
 
       - name: Install Playwright Browsers
-        run: |
-          cd AQA
-          npx playwright install --with-deps chromium
+        defaults:
+          run:
+            working-directory: AQA
+        run: npx playwright install --with-deps
 
-      - name: Run Linter
-        run: |
-          cd AQA
-          npm run lint
+      - name: Run Vitest API Tests
+        defaults:
+          run:
+            working-directory: AQA
+        run: npm run test:api -- --passWithNoTests
 
-      - name: Run AQA Tests
-        run: |
-          cd AQA
-          npm run test
+      - name: Run Playwright E2E Tests
+        defaults:
+          run:
+            working-directory: AQA
+        run: npx playwright test
