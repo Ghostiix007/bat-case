@@ -9,6 +9,7 @@ const config = require('./src/config/env.js')
 
 const authRoutes = require('./src/routes/authRoutes.js')
 const caseRoutes = require('./src/routes/caseRoutes.js')
+const inventoryRoutes = require('./src/routes/inventoryRoutes.js')
 
 const PORT = config.PORT
 
@@ -21,6 +22,7 @@ app.use(cookieParser())
 app.use(passport.initialize())
 app.use("/api/auth", authRoutes)
 app.use("/api/cases", caseRoutes)
+app.use("/api/inventory", inventoryRoutes)
 
 app.listen(PORT, () => {
     console.log(`BatCase Server running on port ${PORT}\nOn address http://localhost:${PORT}`)
