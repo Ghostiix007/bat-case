@@ -41,6 +41,42 @@ import {
 } from "lucide-react";
 import "./index.css";
 
+// ─── Backend API layer ────────────────────────────────────────────────
+// Задай VITE_API_URL у .env (напр. http://localhost:3000), щоб фронт
+// ходив на реальний бекенд. Без нього працює локальний демо-стан.
+// Контракт ендпоінтів описаний у BACKEND_SPEC.md у корені репозиторію.
+const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");
+const API_ENABLED = Boolean(API_BASE);
+
+async function api(path, options = {}) {
+  const response = await fetch(`${API_BASE}${path}`, {
+    credentials: "include",
+    ...options,
+    headers: { "Content-Type": "application/json", ...(options.headers || {}) },
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(data.error || `API request failed: ${response.status}`);
+  }
+  return data;
+}
+
+const apiClient = {
+  getSession: () => api("/api/auth/me"),
+  logout: () => api("/api/auth/logout", { method: "POST" }),
+  getState: () => api("/api/user/state"),
+  openCases: (caseId, count) => api(`/api/cases/${caseId}/open`, { method: "POST", body: JSON.stringify({ count }) }),
+  sellItems: (itemIds) => api("/api/inventory/sell", { method: "POST", body: JSON.stringify({ itemIds }) }),
+  sellAll: () => api("/api/inventory/sell-all", { method: "POST" }),
+  upgrade: (itemId, targetName) => api("/api/upgrade", { method: "POST", body: JSON.stringify({ itemId, targetName }) }),
+  deposit: (amount, method) => api("/api/deposit", { method: "POST", body: JSON.stringify({ amount, method }) }),
+  adminLogin: (login, password) => api("/api/admin/login", { method: "POST", body: JSON.stringify({ login, password }) }),
+  adminSetBalance: (userId, balance) => api(`/api/admin/users/${userId}/balance`, { method: "PATCH", body: JSON.stringify({ balance }) }),
+  adminSetCasePrice: (caseId, price) => api(`/api/admin/cases/${caseId}`, { method: "PATCH", body: JSON.stringify({ price }) }),
+  adminAddDrop: (caseId, skin) => api(`/api/admin/cases/${caseId}/drops`, { method: "POST", body: JSON.stringify({ skin }) }),
+  adminRemoveDrop: (caseId, skin) => api(`/api/admin/cases/${caseId}/drops/${encodeURIComponent(skin)}`, { method: "DELETE" }),
+};
+
 const caseTypes = [
   { id: "all", label: "Усі", helper: "Весь пул" },
   { id: "free", label: "Безкоштовний", helper: "Стартовий кейс" },
@@ -532,6 +568,8 @@ const skinImages = {
   "AWP | Desert Hydra": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6x0JOKSMWuZxuZi_uA7Syu2w0Ry4mqGzYypeH3DaAEnCpt0FuAK4RjrkoDgMb7mtFfcit5bjXKpX4RFZcA",
   "Karambit | Doppler": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Q7uCvZaZkNM-SA1iDwP5muOh7Sha-lA8lvziMgIr9HifOOV5kFMRxFuEM5hi_xNXhMbmx5VCMjd9MyCv6jigc6n064ucLAvZ3_6bViV3fcepqpLtspE0",
   "Butterfly Knife | Doppler": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qv0u9moOlgXSyMmBw1sTGAk5X8JRTFAVp5Xco0W-ENtRXswYC1Mu_ks1fdjN9EyiqthiMbvHtv5btQBPck-KbT2gnHM-Ajoc5Ufn65u8U",
+  "Sawed-Off | Black Sand": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2tfZt-IeeWCmiWx9F0vOBqRBaglBMjjDGMnYftb3qSOAF2XpV0ELMJsUS_ldGzMO_isVHagt9Az32ojiob6Hk9sbtXB6o7uvqARF8zTjE",
+  "MP5-SD | Kitbash": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsPz-R1c_M2jePF-JM-ED3SExOJ3vuVWQyy0lB4-jDGMnYftb32XZ1NyX5B5QuJcthi7k9K0Ye6zsQeP2IMRyiX4iSJLvC5q6-4HUaY7uvqAsG-atjE",
 };
 
 Object.assign(skinImages, {
@@ -717,7 +755,7 @@ function App() {
     setActiveView("opening");
   };
 
-  const openCase = (crate = selectedCase, count = openCount) => {
+  const openCase = async (crate = selectedCase, count = openCount) => {
     if (isOpening) return;
 
     const amount = Math.max(1, count);
@@ -728,17 +766,31 @@ function App() {
       return;
     }
 
-    const rolledItems = Array.from({ length: amount }, () => {
-      let dropItem = itemFromName(pickWeightedDrop(crate), crate.price);
-      if (crate.id === "starter-free" && dropItem.price < 30) {
-        dropItem = { ...dropItem, price: 30 };
-      }
-      return dropItem;
-    });
-    const bestItem = rolledItems.reduce((best, entry) => (entry.price > best.price ? entry : best), rolledItems[0]);
-
     setIsOpening(true);
-    setBalance((value) => value - cost);
+
+    let rolledItems;
+    if (API_ENABLED) {
+      try {
+        const data = await apiClient.openCases(crate.id, amount);
+        rolledItems = data.items;
+        if (typeof data.balance === "number") setBalance(data.balance);
+      } catch (error) {
+        setIsOpening(false);
+        setOpenResult({ crate, item: null, items: [], error: error.message });
+        return;
+      }
+    } else {
+      rolledItems = Array.from({ length: amount }, () => {
+        let dropItem = itemFromName(pickWeightedDrop(crate), crate.price);
+        if (crate.id === "starter-free" && dropItem.price < 30) {
+          dropItem = { ...dropItem, price: 30 };
+        }
+        return dropItem;
+      });
+      setBalance((value) => value - cost);
+    }
+
+    const bestItem = rolledItems.reduce((best, entry) => (entry.price > best.price ? entry : best), rolledItems[0]);
     setRollingItems(rolledItems);
 
     window.setTimeout(() => {
@@ -754,47 +806,90 @@ function App() {
 
   const upgradeChance = calculateUpgradeChance(selectedItem, selectedTarget);
 
-  const quickSell = (item) => {
-    setBalance((value) => value + item.price);
+  const quickSell = async (item) => {
     const nextItems = inventory.filter((entry) => entry.id !== item.id);
-    setInventory(nextItems);
+    let serverInventory = null;
+
+    if (API_ENABLED) {
+      try {
+        const data = await apiClient.sellItems([item.id]);
+        if (typeof data.balance === "number") setBalance(data.balance);
+        if (Array.isArray(data.inventory)) serverInventory = data.inventory;
+      } catch (error) {
+        console.error("Sell failed:", error);
+        return;
+      }
+    } else {
+      setBalance((value) => value + item.price);
+    }
+
+    setInventory(serverInventory || nextItems);
     if (selectedItem?.id === item.id) {
       setSelectedItem(nextItems[0] || null);
     }
   };
 
-  const sellAll = () => {
+  const sellAll = async () => {
     const total = inventory.reduce((sum, item) => sum + item.price, 0);
-    setBalance((value) => value + total);
+    if (API_ENABLED) {
+      try {
+        const data = await apiClient.sellAll();
+        if (typeof data.balance === "number") setBalance(data.balance);
+      } catch (error) {
+        console.error("Sell all failed:", error);
+        return;
+      }
+    } else {
+      setBalance((value) => value + total);
+    }
     setInventory([]);
     setSelectedItem(null);
   };
 
-  const runUpgrade = () => {
+  const runUpgrade = async () => {
     if (!selectedItem || isUpgrading) return;
 
     const inputItem = selectedItem;
     const targetItem = selectedTarget;
     const chance = calculateUpgradeChance(inputItem, targetItem);
-    const roll = Math.round((Math.random() * 100 + Number.EPSILON) * 10) / 10;
-    const won = roll <= chance;
+    let roll = Math.round((Math.random() * 100 + Number.EPSILON) * 10) / 10;
+    let won = roll <= chance;
+    let resultItem = null;
+    let serverInventory = null;
 
     setIsUpgrading(true);
-    setUpgradeRoll({ roll, won, chance });
     setUpgradeResult(null);
+
+    if (API_ENABLED) {
+      try {
+        const data = await apiClient.upgrade(inputItem.id, targetItem.name);
+        won = Boolean(data.won);
+        if (typeof data.roll === "number") roll = data.roll;
+        if (data.item) resultItem = data.item;
+        if (Array.isArray(data.inventory)) serverInventory = data.inventory;
+      } catch (error) {
+        console.error("Upgrade failed:", error);
+        setIsUpgrading(false);
+        return;
+      }
+    }
+
+    setUpgradeRoll({ roll, won, chance });
 
     window.setTimeout(() => {
       const remainingItems = inventory.filter((item) => item.id !== inputItem.id);
       const remainingSelected = remainingItems[0] || null;
-      const resultItem = {
-        id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-        name: targetItem.name,
-        weapon: getWeaponName(targetItem.name),
-        rarity: targetItem.rarity,
-        price: targetItem.price,
-        wear: wearOptions[Math.floor(Math.random() * wearOptions.length)],
-      };
-      const nextItems = won ? [resultItem, ...remainingItems] : remainingItems;
+      if (!resultItem) {
+        resultItem = {
+          id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+          name: targetItem.name,
+          weapon: getWeaponName(targetItem.name),
+          rarity: targetItem.rarity,
+          price: targetItem.price,
+          wear: wearOptions[Math.floor(Math.random() * wearOptions.length)],
+        };
+      }
+      const nextItems = serverInventory || (won ? [resultItem, ...remainingItems] : remainingItems);
 
       setInventory(nextItems);
       setSelectedItem(won ? resultItem : remainingSelected);
@@ -805,12 +900,12 @@ function App() {
   };
 
   const connectSteam = () => {
-    window.location.href = "/api/auth/steam";
+    window.location.href = `${API_BASE}/api/auth/steam`;
   };
 
   const disconnectSteam = async () => {
     try {
-      await fetch("/api/auth/logout", { method: "POST" });
+      await apiClient.logout();
       setSteamProfile(null);
       setActiveView("auth");
     } catch (error) {
@@ -818,7 +913,18 @@ function App() {
     }
   };
 
-  const handleAdminLogin = (login, password) => {
+  const handleAdminLogin = async (login, password) => {
+    if (API_ENABLED) {
+      try {
+        await apiClient.adminLogin(login, password);
+        setIsAdmin(true);
+        setAdminLogin("");
+        setAdminPassword("");
+        return;
+      } catch (error) {
+        console.error("Admin login failed:", error);
+      }
+    }
     if (login === "admin" && password === "admin") {
       setIsAdmin(true);
       setAdminLogin("");
@@ -835,6 +941,7 @@ function App() {
 
   const updateUserBalance = (userId, newBalance) => {
     setUsers((prev) => prev.map((user) => (user.id === userId ? { ...user, balance: newBalance } : user)));
+    if (API_ENABLED) apiClient.adminSetBalance(userId, newBalance).catch((error) => console.error("Admin balance update failed:", error));
     // If it's the current user (admin testing), update their balance too
     if (steamProfile && steamProfile.steamId === users.find(u => u.id === userId)?.steamId) {
       setBalance(newBalance);
@@ -847,7 +954,7 @@ function App() {
     if (selectedCase.id === caseId) {
       setSelectedCase(updatedCases.find(c => c.id === caseId));
     }
-    console.log("Updated case:", caseId, "new price:", newPrice);
+    if (API_ENABLED) apiClient.adminSetCasePrice(caseId, newPrice).catch((error) => console.error("Case price update failed:", error));
   };
 
   const addSkinToCase = (caseId, skinName) => {
@@ -855,7 +962,7 @@ function App() {
     if (selectedCase.id === caseId) {
       setSelectedCase(updatedCases.find(c => c.id === caseId));
     }
-    console.log("Added skin to case:", caseId, "skin:", skinName);
+    if (API_ENABLED) apiClient.adminAddDrop(caseId, skinName).catch((error) => console.error("Add drop failed:", error));
   };
 
   const removeSkinFromCase = (caseId, skinName) => {
@@ -863,14 +970,13 @@ function App() {
     if (selectedCase.id === caseId) {
       setSelectedCase(updatedCases.find(c => c.id === caseId));
     }
-    console.log("Removed skin from case:", caseId, "skin:", skinName);
+    if (API_ENABLED) apiClient.adminRemoveDrop(caseId, skinName).catch((error) => console.error("Remove drop failed:", error));
   };
 
   useEffect(() => {
     const loadProfile = async () => {
       try {
-        const response = await fetch("/api/auth/me");
-        const data = await response.json();
+        const data = await apiClient.getSession();
         if (data.profile) {
           setSteamProfile(data.profile);
         }
@@ -879,7 +985,19 @@ function App() {
       }
     };
 
+    const loadState = async () => {
+      if (!API_ENABLED) return;
+      try {
+        const data = await apiClient.getState();
+        if (typeof data.balance === "number") setBalance(data.balance);
+        if (Array.isArray(data.inventory)) setInventory(data.inventory);
+      } catch (error) {
+        console.error("Failed to load user state:", error);
+      }
+    };
+
     loadProfile();
+    loadState();
 
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get("steam") === "connected") {
@@ -922,9 +1040,19 @@ function App() {
               quickSell(item);
               setOpenResult((result) => ({ ...result, item: { ...item, sold: true } }));
             }}
-            onSellAll={(items) => {
+            onSellAll={async (items) => {
               const soldIds = new Set(items.map((entry) => entry.id));
-              setBalance((value) => value + items.reduce((sum, entry) => sum + entry.price, 0));
+              if (API_ENABLED) {
+                try {
+                  const data = await apiClient.sellItems(items.map((entry) => entry.id));
+                  if (typeof data.balance === "number") setBalance(data.balance);
+                } catch (error) {
+                  console.error("Sell all failed:", error);
+                  return;
+                }
+              } else {
+                setBalance((value) => value + items.reduce((sum, entry) => sum + entry.price, 0));
+              }
               setInventory((current) => current.filter((entry) => !soldIds.has(entry.id)));
               if (selectedItem && soldIds.has(selectedItem.id)) setSelectedItem(null);
               setOpenResult((result) => ({
@@ -974,7 +1102,21 @@ function App() {
           />
         )}
         {activeView === "deposit" && (
-          <DepositView balance={balance} onDeposit={(amount) => setBalance((prev) => prev + amount)} />
+          <DepositView
+            balance={balance}
+            onDeposit={async (amount, method) => {
+              if (API_ENABLED) {
+                try {
+                  const data = await apiClient.deposit(amount, method);
+                  if (typeof data.balance === "number") setBalance(data.balance);
+                  return;
+                } catch (error) {
+                  console.error("Deposit failed:", error);
+                }
+              }
+              setBalance((prev) => prev + amount);
+            }}
+          />
         )}
         {activeView === "admin" && (
           <AdminView
@@ -1008,29 +1150,38 @@ function App() {
 }
 
 function CasesView({ activeType, filteredCases, groupedCases, onOpen, onSelect, selectedCase, setActiveType }) {
+  const freeCase = groupedCases.flatMap((group) => group.cases).find((crate) => crate.price === 0) || selectedCase;
+
   return (
     <section className="screen cases-screen">
-      <div className="free-drop-banner">
-        <Gift size={18} />
-        <span>
-          Для нових користувачів — <b>1 безкоштовне відкриття</b> кейса Starter Case
-        </span>
-      </div>
-
       <div className="hero-band">
         <div className="hero-copy">
           <span className="eyebrow">CS cases · tactical unboxing protocol</span>
-          <h1>
-            BAT
-            <span>CASE</span>
-          </h1>
+          <div className="hero-logo">
+            <span className="hero-logo-badge">
+              <PackageOpen size={28} />
+            </span>
+            <h1>
+              BAT
+              <span>CASE</span>
+            </h1>
+          </div>
+          <div className="hero-announce">
+            <span className="hero-announce-icon">
+              <Gift size={22} />
+            </span>
+            <div className="hero-announce-copy">
+              <b>1 безкоштовне відкриття для нових користувачів</b>
+              <span>Відкрий Starter Case безкоштовно — дроп одразу потрапить до інвентаря.</span>
+            </div>
+          </div>
           <div className="hero-stats">
             <span>16 cases</span>
             <span>{totalSkinCount} skins</span>
             <span>free + paid</span>
           </div>
         </div>
-        <FeaturedCase crate={selectedCase} onOpen={() => onOpen(selectedCase)} />
+        <FeaturedCase crate={freeCase} onOpen={() => onOpen(freeCase)} />
       </div>
 
       <div className="section-head">
@@ -1930,7 +2081,7 @@ function DepositView({ balance, onDeposit }) {
       setShowDemoMessage(true);
       setTimeout(() => {
         setShowDemoMessage(false);
-        onDeposit(100);
+        onDeposit(100, selectedMethod);
         setFormData({});
       }, 3000);
     }
