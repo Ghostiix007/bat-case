@@ -10,6 +10,7 @@ const config = require('./src/config/env.js')
 const authRoutes = require('./src/routes/authRoutes.js')
 const caseRoutes = require('./src/routes/caseRoutes.js')
 const inventoryRoutes = require('./src/routes/inventoryRoutes.js')
+const userRoutes = require('./src/routes/userRoutes.js')
 
 const PORT = config.PORT
 
@@ -23,6 +24,7 @@ app.use(passport.initialize())
 app.use("/api/auth", authRoutes)
 app.use("/api/cases", caseRoutes)
 app.use("/api/inventory", inventoryRoutes)
+app.use("/api/user", userRoutes)
 
 app.listen(PORT, () => {
     console.log(`BatCase Server running on port ${PORT}\nOn address http://localhost:${PORT}`)
