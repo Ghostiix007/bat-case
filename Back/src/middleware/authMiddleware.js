@@ -2,17 +2,19 @@ const jwt = require('jsonwebtoken')
 const config = require('../config/env.js')
 
 const authMiddleware = (req, res, next) => {
-    const token = req.cookies?.token
+    const token = req.cookies?.batcase_steam_session
 
     if (!token) {
-        return res.status(401).json({ message: "authorization needed"})
+        req.user = null
+        return next()
     }
 
     try{
-        req.user = jwt.verify(config.JWT_SECRET)
+        req.user = jwt.verify(token, config.JWT_SECRET)
         next()
     } catch(error){
-        return res.status(401).json({ message: "invalid token" })
+        req.user = null
+        return next()
     }
 }
 
