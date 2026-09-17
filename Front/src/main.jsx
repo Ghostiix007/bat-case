@@ -33,9 +33,7 @@ import {
   Settings,
   Search,
   Edit,
-  Trash2,
   Plus,
-  Save,
   X,
   Check,
 } from "lucide-react";
@@ -350,15 +348,6 @@ const cases = [
 ];
 
 const totalSkinCount = new Set(cases.flatMap((crate) => crate.drops)).size;
-
-const inventorySeed = [
-  { id: "i1", name: "Nova | Clear Polymer", weapon: "Nova", rarity: "milspec", price: 49, wear: "Field-Tested" },
-  { id: "i2", name: "P2000 | Granite Marbleized", weapon: "P2000", rarity: "industrial", price: 18, wear: "Minimal Wear" },
-  { id: "i3", name: "P90 | Death by Kitty", weapon: "P90", rarity: "restricted", price: 118, wear: "Factory New" },
-  { id: "i4", name: "MP7 | Urban Hazard", weapon: "MP7", rarity: "industrial", price: 76, wear: "Field-Tested" },
-  { id: "i5", name: "Tec-9 | Fuel Injector", weapon: "Tec-9", rarity: "classified", price: 190, wear: "Minimal Wear" },
-  { id: "i6", name: "Sawed-Off | Black Sand", weapon: "Sawed-Off", rarity: "milspec", price: 33, wear: "Battle-Scarred" },
-];
 
 const targets = [
   { name: "Nova | Clear Polymer", rarity: "milspec", price: 49 },
