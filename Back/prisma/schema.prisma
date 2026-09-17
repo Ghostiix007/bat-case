@@ -97,6 +97,7 @@ model Payment {
   id     String  @id @default(uuid())
   userId String  @map("user_id")
   amount Decimal @db.Decimal(10, 2)
+  createdAt DateTime @default(now()) @map("created_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
