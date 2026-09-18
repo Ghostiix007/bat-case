@@ -2,53 +2,33 @@ const prisma = require("../config//db.js")
 
 const sellSkin = async (req, res) => {
     try{
-        const { inventoryId } = req.params
+        const {skinId} = req.params
         const userId = req.user.id
 
         const result = await prisma.$transaction(async (tx) => {
-            const item = await tx.userInventory.FindFirst({
-                where: { id: inventoryId, userId: userId },
-                include: { skin: true }
+            const item = await tx.userInventory.findFirst({
+                where: { id: skinId, userId: userId }
             })
 
             if(!item){
                 throw new Error("ITEM_NOT_FOUND")
             }
 
-            const skinPrice = parseFloat(item.skin.price)
+            const itemPrice = Number(item.price)
 
             await tx.userInventory.delete({
-                where: { id: inventoryId }
+                where: {id: skinId}
             })
 
-            const updatedUser = await tx.user.update({
+            const updateUser = await tx.user.update({
                 where: {id: userId},
-                data: {
-                    balance: { increment: skinPrice }
-                }
+                data: { balance: { increment: itemPrice } }
             })
 
-            await tx.log.create({
-                data: {
-                    eventType: "SELL_SKIN",
-                    userId: userId,
-                    payload: {
-                        inventoryId: inventoryId,
-                        skinId: item.skin.id,
-                        skinName: item.skin.name,
-                        price: skinPrice
-                    }
-                }
-            })
-
-            return {
-                soldSkin: item.skin.name,
-                price: skinPrice,
-                newBalance: updatedUser.balance,
-            }
+            return {balance: Number(updatedUser.balance)}
         })
 
-        return res.status(200).json({ message: "Skin successfully sold", ...result })
+        return res.status(200).json({ balance: result.balance })
     } catch(error) {
         if(error.message === "ITEM_NOT_FOUND"){
             return res.status(404).json({ message: "Skin was not found in inventory" })
