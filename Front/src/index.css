@@ -1632,6 +1632,22 @@ button:disabled:hover {
   text-align: center;
 }
 
+.case-drops {
+  width: 100%;
+  margin-top: 30px;
+}
+
+.case-drops-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.case-drops-grid {
+  width: 100%;
+}
+
 .multi-drop-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
@@ -1675,6 +1691,13 @@ button:disabled:hover {
   font-size: 12px;
 }
 
+.case-drops-grid .multi-drop-item i {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: normal;
+}
+
 .multi-drop-total {
   margin-bottom: 18px;
   color: var(--muted);
@@ -1682,6 +1705,17 @@ button:disabled:hover {
 }
 
 .multi-drop-total b {
+  color: var(--green-2);
+}
+
+.rate-note {
+  margin: -8px auto 16px;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+.rate-note b {
   color: var(--green-2);
   font-family: var(--font-mono);
 }
