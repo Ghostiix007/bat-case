@@ -137,5 +137,5 @@ The platform utilizes Steam OpenID for user authentication. Role-Based Access Co
 ![AccountPage](https://media.discordapp.net/attachments/1548312441031630982/1550188915447697408/image.png?ex=6aaebeee&is=6aad6d6e&hm=7011da14de65b53bd8fe659c5eb80ac64a1cfce8352f94341758375cf15c5b80&=&format=webp&quality=lossless)
 ![UpgradePage](https://media.discordapp.net/attachments/1548312441031630982/1550188984968159323/image.png?ex=6aaebeff&is=6aad6d7f&hm=b855429cf0e396062252f6d7fb268e4f4cedef001f26213ca60b398b0e3e54ae&=&format=webp&quality=lossless)
 ![DataBaseScheme](https://media.discordapp.net/attachments/1548312589984075838/1550608747611684944/image.png?ex=6aaef46e&is=6aada2ee&hm=c7ce597d66bf3a64d0bdfb81d0e8ea62968e1a8db62a434bb7d4e08b93a6af33&=&format=webp&quality=lossless)
-
+![AutoTests](https://media.discordapp.net/attachments/1548312589984075838/1550636308249186324/image.png?ex=6aaf0e19&is=6aadbc99&hm=f9cf2bdc120006acdc6c06f88b3a56511edb9c7d2b1ee87cf9c147a9916f1986&=&format=webp&quality=lossless)
 
