@@ -16,6 +16,7 @@ const getSkins = async (req, res) => {
         })
 
         const formatedSkins = skins.map((skin) => ({
+            id: skin.id,
             name: skin.name,
             weapon: skin.weapon,
             rarity: skin.rarity,
@@ -29,4 +30,6 @@ const getSkins = async (req, res) => {
     }
 }
 
-module.exports = getSkins
+module.exports = {
+    getSkins
+}

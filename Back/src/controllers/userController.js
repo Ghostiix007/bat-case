@@ -40,4 +40,6 @@ const getUserState = async (req, res) => {
     }
 }
 
-module.exports = getUserState
+module.exports = {
+    getUserState
+}

@@ -74,5 +74,7 @@ const upgradeItem = async (req, res) => {
     }
 }
 
-module.exports = upgradeItem
+module.exports = {
+    upgradeItem
+}
 

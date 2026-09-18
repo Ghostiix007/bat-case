@@ -266,7 +266,6 @@ const addSkinsToCase = async (req, res) => {
 
 
 module.exports = {
-    getSkins: getSkins,
     getCases,
     getCaseById,
     openCase,
