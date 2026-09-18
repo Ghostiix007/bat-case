@@ -37,4 +37,45 @@ const sellSkin = async (req, res) => {
     }
 }
 
-module.exports = sellSkin
+const sellAllItems = async (req, res) => {
+    try{
+        const userId = req.user.id
+
+        const result = await prisma.$transaction(async (tx) => {
+            const userItems = await tx.userInventory.findMany({
+                where: { userId: userId }
+            })
+
+            if(userItems.length === 0){
+                const user = await tx.user.findUnique({ where: { id: userId } })
+                return { balance: Number(user ? user.balance : 0), soldCount: 0 }
+            }
+
+            const totalAmount = userItems.reduce((sum, item) => sum + Number(item.price), 0)
+            const soldCount = userItems.length
+
+            await tx.userInventory.deleteMany({
+                where: {id: userId}
+            })
+
+            const updatedUser = await tx.user.update({
+                where: {id: userId},
+                data: { balance: { increment: totalAmount } }
+            })
+
+            return {
+                balance: Number(updatedUser.balance),
+                soldCount: soldCount,
+            }
+        })
+
+        return res.status(200).json(result)
+    } catch(error) {
+        return res.status(500).json({ error: "Error while selling all inventory" })
+    }
+}
+
+module.exports = {
+    sellSkin,
+    sellAllItems
+}
