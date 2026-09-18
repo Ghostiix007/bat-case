@@ -33,4 +33,6 @@ const makeDeposit = async (req, res) => {
     }
 }
 
-module.exports = makeDeposit
+module.exports = {
+    makeDeposit
+}
