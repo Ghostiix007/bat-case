@@ -6,7 +6,7 @@ const adminMiddleware = require("../middleware/adminMiddleware.js")
 
 router.get("/", getCases)
 router.get("/:id", getCaseById)
-router.post("/:id/open", authMiddleware, openCase)
+router.post("/:caseId/open", authMiddleware, openCase)
 router.post("/", authMiddleware, adminMiddleware, createCase)
 router.put("/:id", authMiddleware, adminMiddleware, updateCase)
 router.delete("/:id", authMiddleware, adminMiddleware, deleteCase)

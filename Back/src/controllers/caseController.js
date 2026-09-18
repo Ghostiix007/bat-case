@@ -1,5 +1,6 @@
 const prisma = require("../config/db")
 const {getRandomSkin} = require("../utils/randomSkinGeter.js")
+const WEARS = ["Factory new", "Minimal wear", "Field-tested", "Battle-scarred"]
 
 const getCases = async (req, res) => {
     try{
@@ -53,56 +54,109 @@ const getCaseById = async (req, res) => {
 
 const openCase = async (req, res) => {
     try{
-        const {id: caseId} = req.params
+        const {caseId} = req.params
+        const count = Math.min(Math.max(parseInt(req.body.count) || 1, 1), 5)
         const userId = req.user.id
 
-        const result = await prisma.$transaction(async (tx) => {
-            const caseData = await tx.case.findUnique({
-                where: { id: caseId, isActive: true },
-                include: { caseSkins : {include: { skin: true } } }
-            })
-
-            if(!caseData || caseData.caseSkins.length === 0){
-                throw new Error("No case found or it is empty")
-            }
-
-            const user = await tx.user.findUnique({ where: { id: userId } })
-            if(Number(user.balance) < Number(caseData.price)){
-                throw new Error("Not enough money")
-            }
-
-            const updateUser = await tx.user.update({
-                where: { id: userId },
-                data: { balance: { decrement: caseData.price } }
-            })
-
-            const selectedCaseSkin = getRandomSkin(caseData.caseSkins)
-            const droppedSkin = selectedCaseSkin.skin
-
-            await tx.userInventory.create({
-                data: {
-                    userId: user.id,
-                    skinId: droppedSkin.id
+        const caseData = await prisma.case.findUnique({
+            where: { id: caseId },
+            include: {
+                caseSkins: {
+                    include: { skin: true }
                 }
-            })
-
-            await tx.log.create({
-                data: {
-                    eventType: "CASE_OPEN",
-                    userId: user.id,
-                    payload: {caseId: caseData.id, skinId: droppedSkin.id}
-                }
-            })
-
-            return {
-                droppedSkin,
-                newBalance: updateUser.balace
             }
         })
 
-        res.json(result)
+        if(!caseData){
+            return res.status(404).json({ error: "Case not found" })
+        }
+
+        const user = await prisma.user.findUnique({
+            where: { id: userId }
+        })
+
+        if(!user){
+            return res.status(404).json({ error: "User not found" })
+        }
+
+        const isFreeCase = caseData.price === 0 || caseId === "starter-free"
+
+        if(isFreeCase){
+            if(user.freeCaseUsed){
+                return res.status(403).json({ error: "Free case is already used" })
+            }
+            if(count > 1){
+                return res.status(400).json({ error: "Free case can be opened only one time"})
+            }
+        }
+
+        const casePrice = Number(caseData.price)
+        const totalPrice = casePrice * count
+
+        if(Number(user.balance) < totalPrice){
+            return res.status(402).json({ error: "Not enough credits on balance" })
+        }
+
+        const result = await prisma.$transaction(async (tx) => {
+            const updateUser = await tx.user.update({
+                where: {id: userId},
+                data: isFreeCase ? {freeCaseUsed: true} : {balance: {decrement: totalPrice}}
+            })
+
+            const droppedItems = []
+
+            for (let i = 0; i < count; i++) {
+                const wonSkin = getRandomSkin(caseData.caseSkins, casePrice)
+                const skinPrice = Number(wonSkin.price)
+
+                let calculatedPrice = Math.max(8, Math.round((skinPrice + casePrice * 0.15) * (0.84 + Math.random() * 0.32)))
+
+                if (isFreeCase && calculatedPrice < 30) {
+                    calculatedPrice = 30
+                }
+
+                const randomWear = WEARS[Math.floor(Math.random() * WEARS.length)]
+
+                const newItem = await tx.userInventory.create({
+                    data: {
+                        userId,
+                        skinId: wonSkin.id,
+                        price: calculatedPrice,
+                        wear: randomWear,
+                        source: "case"
+                    },
+                    include: {skin: true}
+                })
+
+                droppedItems.push({
+                    id: newItem.id,
+                    name: newItem.skin.name,
+                    weapon: newItem.skin.weapon,
+                    rarity: newItem.skin.rarity,
+                    price: Number(newItem.price),
+                    wear: newItem.wear,
+                })
+            }
+
+            return {
+                items: droppedItems,
+                balance: Number(updatedUser.balance),
+                freeCaseUsed: updatedUser.freeCaseUsed
+            }
+        })
+
+        const response = {
+            items: result.items,
+            balance: result.balance
+        }
+
+        if(isFreeCase){
+            response.freeCaseUsed = true
+        }
+
+        return res.status(200).json(response)
     }catch(error){
-        res.status(500).json({ message: "Error while opening case", error: error.message })
+        res.status(500).json({ error: "Error while opening case" })
     }
 }
 
