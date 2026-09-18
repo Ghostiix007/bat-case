@@ -130,4 +130,12 @@ The platform utilizes Steam OpenID for user authentication. Role-Based Access Co
 
 ## 11. Screenshots
 
-![test](https://media.discordapp.net/attachments/1548311334544871534/1550184927390081164/image.png?ex=6aad69b7&is=6aac1837&hm=21e30cf7cec4ce4058ac29161e1fdd013b4d7f4c4cf498ec7e078b96bcdda3e9&=&format=webp&quality=lossless)
+![SkinReceived](https://media.discordapp.net/attachments/1548312441031630982/1550187438704435300/2026-09-17_194624.png?ex=6aaebd8e&is=6aad6c0e&hm=6955f7be1f172f30b8dbe71745c49ce9782782245570d90c4ef95a81fc78200e&=&format=webp&quality=lossless)
+![MainPage](https://media.discordapp.net/attachments/1548312441031630982/1550187439082180719/2026-09-17_194539.png?ex=6aaebd8e&is=6aad6c0e&hm=1715799f90fe3a9d392f4c522f739acb5933950c68c133c7e249e81383f5603e&=&format=webp&quality=lossless)
+![CasePage](https://media.discordapp.net/attachments/1548312441031630982/1550187439417721003/2026-09-17_194604.png?ex=6aaebd8e&is=6aad6c0e&hm=44381ca4bff0e7403196b4ca62f67b9ce27ed23ab64f7c92cd5244a47859f1cf&=&format=webp&quality=lossless)
+![SpinCase](https://media.discordapp.net/attachments/1548312441031630982/1550187439853666374/2026-09-17_194617.png?ex=6aaebd8e&is=6aad6c0e&hm=78947c1db0d058fbd1084768a69fc766f4deb6ef7e1282b82022bbde267c96d3&=&format=webp&quality=lossless)
+![AccountPage](https://media.discordapp.net/attachments/1548312441031630982/1550188915447697408/image.png?ex=6aaebeee&is=6aad6d6e&hm=7011da14de65b53bd8fe659c5eb80ac64a1cfce8352f94341758375cf15c5b80&=&format=webp&quality=lossless)
+![UpgradePage](https://media.discordapp.net/attachments/1548312441031630982/1550188984968159323/image.png?ex=6aaebeff&is=6aad6d7f&hm=b855429cf0e396062252f6d7fb268e4f4cedef001f26213ca60b398b0e3e54ae&=&format=webp&quality=lossless)
+![DataBaseScheme](https://media.discordapp.net/attachments/1548312589984075838/1550608747611684944/image.png?ex=6aaef46e&is=6aada2ee&hm=c7ce597d66bf3a64d0bdfb81d0e8ea62968e1a8db62a434bb7d4e08b93a6af33&=&format=webp&quality=lossless)
+
+
