@@ -18,10 +18,13 @@ enum Role {
 }
 
 model User {
-  id       String  @id
-  username String
-  balance  Decimal @default(0.00) @db.Decimal(12, 2)
-  role     Role    @default(USER)
+  id           String   @id @default(uuid())
+  steamId      String?  @unique @map("steam_id")
+  username     String
+  balance      Decimal  @default(0.00) @db.Decimal(12, 2)
+  role         Role     @default(USER)
+  freeCaseUsed Boolean  @default(false) @map("free_case_used")
+  createdAt    DateTime @default(now()) @map("created_at")
 
   payments  Payment[]
   inventory UserInventory[]
@@ -36,7 +39,7 @@ model Collection {
   imageUrl    String
   description String?
 
-  cases        Case[]
+  cases Case[]
 
   @@map("collections")
 }
@@ -48,9 +51,13 @@ model Case {
   price        Decimal @db.Decimal(10, 2)
   imageUrl     String  @map("image_url")
   description  String?
+  type         String? @default("default") // default | tactical | premium | mythic
+  code         String?
+  volatility   String? @default("Mid")
+  accent       String? @default("#ffd700")
   isActive     Boolean @default(true) @map("is_active")
 
-  collection Collection?     @relation(fields: [collectionId], references: [id])
+  collection Collection? @relation(fields: [collectionId], references: [id])
   caseSkins  CaseSkin[]
 
   @@map("cases")
@@ -59,6 +66,7 @@ model Case {
 model Skin {
   id       String  @id @default(uuid())
   name     String
+  weapon   String?
   rarity   String
   price    Decimal @db.Decimal(10, 2)
   imageUrl String  @map("image_url")
@@ -73,7 +81,7 @@ model CaseSkin {
   id         String @id @default(uuid())
   caseId     String @map("case_id")
   skinId     String @map("skin_id")
-  dropChance Float  @map("drop_chance")
+  dropChance Float? @map("drop_chance") // Необов'язкове, бо вага вираховується динамічно
 
   case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
   skin Skin @relation(fields: [skinId], references: [id], onDelete: Cascade)
@@ -86,17 +94,22 @@ model UserInventory {
   id        String   @id @default(uuid())
   userId    String   @map("user_id")
   skinId    String   @map("skin_id")
+  price     Decimal  @db.Decimal(10, 2)
+  wear      String?  @default("Factory New")
+  source    String?  @default("case") // case | upgrade
+  createdAt DateTime @default(now()) @map("created_at")
 
-  user User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skin Skin  @relation(fields: [skinId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skin Skin @relation(fields: [skinId], references: [id], onDelete: Cascade)
 
   @@map("user_inventory")
 }
 
 model Payment {
-  id     String  @id @default(uuid())
-  userId String  @map("user_id")
-  amount Decimal @db.Decimal(10, 2)
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  amount    Decimal  @db.Decimal(10, 2)
+  createdAt DateTime @default(now()) @map("created_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
