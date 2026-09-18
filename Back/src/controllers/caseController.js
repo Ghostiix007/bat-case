@@ -1,16 +1,32 @@
 const prisma = require("../config/db")
 const {getRandomSkin} = require("../utils/randomSkinGeter.js")
-const {error} = require("@mermaid-js/mermaid-cli");
 
 const getCases = async (req, res) => {
     try{
         const cases = await prisma.case.findMany({
-            where: { isActive: true },
-            include: { collection: true }
+            include: {
+                caseSkins: {
+                    include: {
+                        skin: true
+                    }
+                }
+            }
         })
-        res.json(cases)
+
+        const formatedCases = cases.map((c) => ({
+            id: c.id,
+            name: c.name,
+            type: c.type,
+            code: c.code,
+            price: Number(c.price),
+            volatility: c.volatility,
+            accent: c.accent,
+            drops: c.caseSkins.map((cs) => cs.skin.name)
+        }))
+
+        res.status(200).json(formatedCases)
     } catch (error){
-        res.status(500).send({ message: "Error while getting collections", error: error.message })
+        res.status(500).json({ error: "Error while getting collections" })
     }
 }
 
@@ -196,6 +212,7 @@ const addSkinsToCase = async (req, res) => {
 
 
 module.exports = {
+    getSkins: getSkins,
     getCases,
     getCaseById,
     openCase,
