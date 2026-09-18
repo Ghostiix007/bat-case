@@ -28,3 +28,5 @@ const getSkins = async (req, res) => {
         res.status(500).json({ error: "Error while getting skins" })
     }
 }
+
+module.exports = getSkins

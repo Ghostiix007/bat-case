@@ -11,6 +11,8 @@ module.exports = {
 
     REALM: process.env.REALM,
     RETURN_URL: process.env.RETURN_URL,
-
     FRONTEND_URL: process.env.FRONTEND_URL,
+
+    ADMIN_LOGIN: process.env.ADMIN_LOGIN,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD,
 }
