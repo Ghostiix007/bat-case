@@ -75,6 +75,10 @@ const apiClient = {
   adminRemoveDrop: (caseId, skin) => api(`/api/admin/cases/${caseId}/drops/${encodeURIComponent(skin)}`, { method: "DELETE" }),
 };
 
+// Внутрішня валюта — cr; курс конвертації для відображення: 1 cr = $1.
+const CR_TO_USD = 1;
+const usd = (cr) => `$${(cr * CR_TO_USD).toLocaleString("en-US")}`;
+
 const caseTypes = [
   { id: "all", label: "Усі", helper: "Весь пул" },
   { id: "free", label: "Безкоштовний", helper: "Стартовий кейс" },
@@ -617,17 +621,28 @@ function previewItemFromName(name) {
   };
 }
 
-function pickWeightedDrop(crate) {
-  const pool = crate.drops.map((name) => {
-    const item = getSkinInfo(name);
-    const valuePenalty = Math.max(0.12, Math.min(1, crate.price / Math.max(item.price, 1)));
-    const premiumPenalty = item.price >= 800 ? 0.42 : item.price >= 450 ? 0.58 : item.price >= 250 ? 0.76 : 1;
+function dropWeight(crate, item) {
+  const valuePenalty = Math.max(0.12, Math.min(1, crate.price / Math.max(item.price, 1)));
+  const premiumPenalty = item.price >= 800 ? 0.42 : item.price >= 450 ? 0.58 : item.price >= 250 ? 0.76 : 1;
 
-    return {
-      name,
-      weight: (rarityDropWeight[item.rarity] || 24) * valuePenalty * premiumPenalty,
-    };
-  });
+  return (rarityDropWeight[item.rarity] || 24) * valuePenalty * premiumPenalty;
+}
+
+function dropChances(crate) {
+  const weights = new Map();
+  for (const name of crate.drops) {
+    weights.set(name, (weights.get(name) || 0) + dropWeight(crate, getSkinInfo(name)));
+  }
+  const total = [...weights.values()].reduce((sum, weight) => sum + weight, 0) || 1;
+  const chances = new Map();
+  for (const [name, weight] of weights) {
+    chances.set(name, (weight / total) * 100);
+  }
+  return chances;
+}
+
+function pickWeightedDrop(crate) {
+  const pool = crate.drops.map((name) => ({ name, weight: dropWeight(crate, getSkinInfo(name)) }));
   const totalWeight = pool.reduce((sum, item) => sum + item.weight, 0);
   let roll = Math.random() * totalWeight;
 
@@ -1225,7 +1240,7 @@ function FeaturedCase({ crate, onOpen }) {
     <aside className="featured-case">
       <div className="featured-top">
         <span>{crate.code}</span>
-        <span>{crate.price ? `${crate.price} cr` : "free"}</span>
+        <span>{crate.price ? `${usd(crate.price)}` : "free"}</span>
       </div>
       <CrateArt accent={crate.accent} variant={crate.type} />
       <h3>{crate.name}</h3>
@@ -1243,7 +1258,7 @@ function CaseCard({ crate, onOpen, onSelect, selected }) {
     <article className={selected ? "case-card selected" : "case-card"}>
       <div className="case-card-top">
         <span>{crate.code}</span>
-        <span>{crate.price ? `${crate.price} cr` : "free"}</span>
+        <span>{crate.price ? `${usd(crate.price)}` : "free"}</span>
       </div>
       <CrateArt accent={crate.accent} variant={crate.type} />
       <div className="case-card-body">
@@ -1267,6 +1282,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
   const crate = result?.crate || cases[0];
   const item = result?.item;
   const [showResult, setShowResult] = useState(false);
+  const chances = useMemo(() => dropChances(crate), [crate]);
 
   useEffect(() => {
     if (!item) {
@@ -1301,7 +1317,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
           <span className="eyebrow">{item ? "You won" : "Case opening"}</span>
           <h2>{crate.name}</h2>
           <p>
-            {crate.code} · ціна {crate.price ? `${crate.price} cr` : "free"} · баланс {balance} cr
+            {crate.code} · ціна {crate.price ? `${usd(crate.price)}` : "free"} · баланс {usd(balance)}
           </p>
         </div>
 
@@ -1324,7 +1340,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
               <button className="primary-action wide open-case-button" onClick={onOpen} type="button">
                 <PackageOpen size={16} />
                 {crate.price
-                  ? `Відкрити${count > 1 ? ` x${count}` : ""} за ${crate.price * count} cr`
+                  ? `Відкрити${count > 1 ? ` x${count}` : ""} за ${usd(crate.price * count)}`
                   : "Відкрити безкоштовно"}
               </button>
             </>
@@ -1337,6 +1353,28 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
             </div>
           )}
         </div>
+
+        {!isOpening && !item && crate.drops.length > 0 && (
+          <div className="case-drops">
+            <div className="case-drops-head">
+              <span className="eyebrow">Вміст кейса</span>
+              <span className="muted">{new Set(crate.drops).size} скинів · від дорожчих</span>
+            </div>
+            <div className="multi-drop-grid case-drops-grid">
+              {[...new Set(crate.drops)]
+                .map((name) => previewItemFromName(name))
+                .sort((a, b) => b.price - a.price)
+                .map((drop) => (
+                  <div className="multi-drop-item" key={drop.name} style={{ "--rarity": rarityMeta[drop.rarity].color }}>
+                    <WeaponMark item={drop} compact />
+                    <span>{drop.name}</span>
+                    <b>{usd(drop.price)}</b>
+                    <i>{(chances.get(drop.name) || 0).toFixed(1)}%</i>
+                  </div>
+                ))}
+            </div>
+          </div>
+        )}
 
         {item && showResult && (
           <div className="opening-result-reveal">
@@ -1351,12 +1389,15 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
                     >
                       <WeaponMark item={drop} compact />
                       <span>{drop.name}</span>
-                      <b>{drop.price} cr</b>
+                      <b>{usd(drop.price)}</b>
                     </div>
                   ))}
                 </div>
                 <p className="multi-drop-total">
                   Разом: <b>{result.items.reduce((sum, entry) => sum + entry.price, 0)} cr</b>
+                </p>
+                <p className="rate-note">
+                  Курс: 1 cr = $1 · ≈ {usd(result.items.reduce((sum, entry) => sum + entry.price, 0))}
                 </p>
                 <div className="drop-actions">
                   <button className="primary-action" disabled={result.soldAll} onClick={onKeep} type="button">
@@ -1366,7 +1407,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
                   <button className="result-sell" disabled={result.soldAll} onClick={() => onSellAll(result.items)} type="button">
                     <CircleDollarSign size={17} />
                     Продати все
-                    <b>{result.items.reduce((sum, entry) => sum + entry.price, 0)} cr</b>
+                    <b>{usd(result.items.reduce((sum, entry) => sum + entry.price, 0))}</b>
                   </button>
                   <button className="ghost-action" onClick={onAgain} type="button">
                     <RefreshCw size={17} />
@@ -1385,7 +1426,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
                   <button className="result-sell" disabled={item?.sold} onClick={() => onSell(item)} type="button">
                     <CircleDollarSign size={17} />
                     Продати
-                    <b>{item?.price || 0} cr</b>
+                    <b>{usd(item?.price || 0)}</b>
                   </button>
                   <button className="ghost-action" onClick={onAgain} type="button">
                     <RefreshCw size={17} />
@@ -1498,7 +1539,7 @@ function VaultView({ balance, dropsCount, lastDrop, onOpen, selectedCase }) {
           </button>
         </div>
         <div className="summary-grid">
-          <MetricCard icon={Vault} label="Balance" value={`${balance} cr`} />
+          <MetricCard icon={Vault} label="Balance" value={usd(balance)} />
           <MetricCard icon={PackageOpen} label="Case now" value={selectedCase.name} />
           <MetricCard icon={Sparkles} label="Last rarity" value={lastDrop ? rarityMeta[lastDrop.rarity].label : "—"} />
           <MetricCard icon={History} label="Session" value={`${dropsCount} drops`} />
@@ -1543,7 +1584,7 @@ function SkinPickRow({ active, entry, onSelect }) {
     <button className={active ? "pick-row active" : "pick-row"} onClick={() => onSelect(entry)} type="button">
       <WeaponMark item={entry} compact />
       <span className="pick-row-name">{entry.name}</span>
-      <b>{entry.price} cr</b>
+      <b>{usd(entry.price)}</b>
     </button>
   );
 }
@@ -1592,7 +1633,7 @@ function UpgradeView({ chance, isUpgrading, item, inventory, multiplier, onSelec
           </div>
           <UpgradeWheel chance={chance} roll={roll} />
           <p className="muted">
-            {item ? `${item.price} cr → ${selectedTarget.price} cr` : "Потрібен предмет для апгрейду"}
+            {item ? `${usd(item.price)} → ${usd(selectedTarget.price)}` : "Потрібен предмет для апгрейду"}
           </p>
           <button className="primary-action wide" disabled={!item || isUpgrading} onClick={onUpgrade} type="button">
             <WandSparkles size={16} />
@@ -1652,13 +1693,13 @@ function InventoryView({ inventory, onSell, onSellAll }) {
         </div>
         <div className="inventory-total">
           <span>{inventory.length} items</span>
-          <b>{total} cr</b>
+          <b>{usd(total)}</b>
         </div>
       </div>
       {inventory.length > 0 ? (
         <>
           <div className="inventory-toolbar">
-            <span>Вартість інвентаря: {total} cr</span>
+            <span>Вартість інвентаря: {usd(total)}</span>
             <button className="danger-action" onClick={onSellAll} type="button">
               <CircleDollarSign size={15} />
               Продати все
@@ -1677,7 +1718,7 @@ function InventoryView({ inventory, onSell, onSellAll }) {
                 </div>
                 <button className="sell-button" onClick={() => onSell(item)} type="button">
                   <CircleDollarSign size={14} />
-                  Quick sell · {item.price} cr
+                  Quick sell · {usd(item.price)}
                 </button>
               </article>
             ))}
@@ -1716,7 +1757,7 @@ function ProfileView({ balance, inventory, onSteamLogin, onSteamLogout, steamPro
           )}
         </div>
         <div className="profile-actions">
-          <b>{balance} cr</b>
+          <b>{usd(balance)}</b>
           <button className="ghost-action" onClick={onDeposit} type="button">
             <CircleDollarSign size={14} />
             Deposit
@@ -1733,7 +1774,7 @@ function ProfileView({ balance, inventory, onSteamLogin, onSteamLogout, steamPro
       </div>
       <div className="summary-grid profile-metrics">
         <MetricCard icon={Boxes} label="Items" value={inventory.length} />
-        <MetricCard icon={Gem} label="Total value" value={`${value} cr`} />
+        <MetricCard icon={Gem} label="Total value" value={usd(value)} />
         <MetricCard icon={Shield} label="SteamID64" value={steamProfile ? steamProfile.steamId : "not linked"} />
         <MetricCard icon={Star} label="Cases opened" value="4" />
       </div>
@@ -1746,7 +1787,7 @@ function ProfileView({ balance, inventory, onSteamLogin, onSteamLogout, steamPro
               <b>{item.name}</b>
               <span>{item.weapon} · {item.wear}</span>
             </div>
-            <strong>{item.price} cr</strong>
+            <strong>{usd(item.price)}</strong>
           </div>
         ))}
       </div>
@@ -1834,7 +1875,7 @@ function AdminView({ isAdmin, onLogin, onLogout, users, onUpdateBalance, onUpdat
                 <div className="admin-table-row" key={user.id}>
                   <span>{user.steamId}</span>
                   <span>{user.nickname}</span>
-                  <span>{user.balance} cr</span>
+                  <span>{usd(user.balance)}</span>
                   <span>{new Date(user.connectedAt).toLocaleDateString()}</span>
                   <div className="admin-actions">
                     <button className="ghost-action compact" onClick={() => {
@@ -1862,7 +1903,7 @@ function AdminView({ isAdmin, onLogin, onLogout, users, onUpdateBalance, onUpdat
                 <div className="admin-case-card" key={crate.id}>
                   <div className="admin-case-header">
                     <h4>{crate.name}</h4>
-                    <span className="case-price">{crate.price} cr</span>
+                    <span className="case-price">{usd(crate.price)}</span>
                   </div>
                   <div className="admin-case-actions">
                     <button className="ghost-action compact" onClick={() => {
@@ -1926,7 +1967,7 @@ function AdminView({ isAdmin, onLogin, onLogout, users, onUpdateBalance, onUpdat
                       >
                         <div className="admin-skin-info">
                           <h5>{skinName}</h5>
-                          <span className="skin-price">{skin.price} cr</span>
+                          <span className="skin-price">{usd(skin.price)}</span>
                           <span className={`rarity-badge ${skin.rarity}`}>{rarityMeta[skin.rarity].label}</span>
                         </div>
                         {isInCase && <Check size={16} className="check-icon" />}
@@ -2101,7 +2142,7 @@ function DepositView({ balance, onDeposit }) {
         </div>
         <div className="balance-display">
           <small>Current balance</small>
-          <b>{balance} cr</b>
+          <b>{usd(balance)}</b>
         </div>
       </div>
 
@@ -2302,7 +2343,7 @@ function BottomNav({ activeView, balance, onChange }) {
       })}
       <div className="nav-balance">
         <small>balance</small>
-        <b>{balance} cr</b>
+        <b>{usd(balance)}</b>
       </div>
     </nav>
   );
@@ -2347,7 +2388,7 @@ function ItemShowcase({ item, large = false }) {
         <span>{rarityMeta[item.rarity].label}</span>
         <h3>{item.name}</h3>
         <p>{item.wear}</p>
-        <b>{item.price} cr</b>
+        <b>{usd(item.price)}</b>
       </div>
     </div>
   );
