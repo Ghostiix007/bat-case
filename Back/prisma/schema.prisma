@@ -51,7 +51,7 @@ model Case {
   price        Decimal @db.Decimal(10, 2)
   imageUrl     String  @map("image_url")
   description  String?
-  type         String? @default("default") // default | tactical | premium | mythic
+  type         String? @default("default")
   code         String?
   volatility   String? @default("Mid")
   accent       String? @default("#ffd700")
@@ -81,7 +81,7 @@ model CaseSkin {
   id         String @id @default(uuid())
   caseId     String @map("case_id")
   skinId     String @map("skin_id")
-  dropChance Float? @map("drop_chance") // Необов'язкове, бо вага вираховується динамічно
+  dropChance Float? @map("drop_chance")
 
   case Case @relation(fields: [caseId], references: [id], onDelete: Cascade)
   skin Skin @relation(fields: [skinId], references: [id], onDelete: Cascade)
