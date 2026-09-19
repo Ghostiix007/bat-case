@@ -2063,6 +2063,12 @@ button:disabled:hover {
   height: 58px;
 }
 
+.avatar-tile.small {
+  width: 58px;
+  height: 58px;
+  font-size: 26px;
+}
+
 .profile-card h2 {
   margin-top: 5px;
   overflow-wrap: anywhere;
