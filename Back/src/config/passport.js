@@ -29,7 +29,7 @@ passport.use(new SteamStrategy(
 
             const user = await prisma.user.upsert({
                 where: { id: steamId},
-                update: {username},
+                update: {username: username},
                 create: {
                     id: steamId,
                     username: username,

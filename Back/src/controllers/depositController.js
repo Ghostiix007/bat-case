@@ -16,10 +16,17 @@ const makeDeposit = async (req, res) => {
             return res.status(400).json({ error: "Invalid deposit method" })
         }
 
-        const result = prisma.$transaction(async (tx) => {
+        const result = await prisma.$transaction(async (tx) => {
             const updatedUser = await tx.user.update({
                 where: { id: userId},
                 data: { balance: { increment: parsedAmount } }
+            })
+
+            await tx.payment.create({
+                data: {
+                    userId: userId,
+                    amount: parsedAmount
+                }
             })
 
             const depositId = `dep_${crypto.randomBytes(8).toString()}`

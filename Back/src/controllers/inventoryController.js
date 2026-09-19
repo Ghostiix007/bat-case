@@ -20,7 +20,7 @@ const sellSkin = async (req, res) => {
                 where: {id: skinId}
             })
 
-            const updateUser = await tx.user.update({
+            const updatedUser = await tx.user.update({
                 where: {id: userId},
                 data: { balance: { increment: itemPrice } }
             })
