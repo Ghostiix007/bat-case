@@ -95,8 +95,9 @@ POST /api/cases/:caseId/open
 ### 3.4 Інвентар
 
 ```
-POST /api/inventory/:itemId/sell
-→ { "balance": <новий баланс> }
+POST /api/inventory/sell
+  body: { "itemIds": ["id1", "id2"] }  // один або кілька предметів
+→ { "balance": <новий баланс>, "inventory": [ ... ] }
 
 POST /api/inventory/sell-all
 → { "balance": <новий баланс>, "soldCount": n }
@@ -106,13 +107,14 @@ POST /api/inventory/sell-all
 
 ```
 POST /api/upgrade
-  body: { "itemId", "targetSkinName" }
+  body: { "itemId", "targetName" }     // targetName — назва скіна-цілі
 → {
     "won": true|false,
     "roll": 12.3,                      // 0–100, сервер генерує
     "chance": 34,                      // % який був (див. формулу нижче)
     "item": { ... } | null,            // новий предмет при виграші
-    "consumedItemId": "..."            // вхідний предмет завжди спалюється
+    "inventory": [ ... ],              // оновлений інвентар (вхідний предмет спалено)
+    "consumedItemId": "..."            
   }
 → 404 { "error": "item not found" }
 ```
@@ -136,13 +138,13 @@ POST /api/deposit
 Зараз на фронті демо `admin/admin` — це треба замінити.
 
 ```
-POST   /api/admin/login              { login, password } → { "ok": true } + admin-сесія
-GET    /api/admin/users              → [ { "id", "steamId", "nickname", "balance", "connectedAt" } ]
-PATCH  /api/admin/users/:id          { "balance": n } → { "ok": true }
-PATCH  /api/admin/cases/:id          { "price": n } → { "ok": true }
-POST   /api/admin/cases/:id/drops    { "skinName": "..." } → { "ok": true }
-DELETE /api/admin/cases/:id/drops    { "skinName": "..." } → { "ok": true }
-POST   /api/admin/skins              { name, rarity, price, imageUrl } → створення скіна
+POST   /api/admin/login                      { login, password } → { "ok": true } + admin-сесія
+GET    /api/admin/users                      → [ { "id", "steamId", "nickname", "balance", "connectedAt" } ]
+PATCH  /api/admin/users/:id/balance          { "balance": n } → { "ok": true }
+PATCH  /api/admin/cases/:id                  { "price": n } → { "ok": true }
+POST   /api/admin/cases/:id/drops            { "skin": "..." } → { "ok": true }
+DELETE /api/admin/cases/:id/drops/:skinName  → { "ok": true }   // skinName URL-encoded
+POST   /api/admin/skins                      { name, rarity, price, imageUrl } → створення скіна
 ```
 
 ---
