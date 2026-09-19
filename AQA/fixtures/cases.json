@@ -1,0 +1,39 @@
+[
+  {
+    "id": "case-bat-starter",
+    "name": "Bat Starter Case",
+    "price": 100.00,
+    "image": "/images/cases/starter.png",
+    "items": [
+      {
+        "id": "item-skin-01",
+        "name": "AK-47 | Bat Night",
+        "rarity": "Covert",
+        "price": 250.00,
+        "dropChance": 0.10
+      },
+      {
+        "id": "item-skin-02",
+        "name": "Glock-18 | Dark Wing",
+        "rarity": "Restricted",
+        "price": 50.00,
+        "dropChance": 0.90
+      }
+    ]
+  },
+  {
+    "id": "case-bat-legendary",
+    "name": "Legendary Gotham Case",
+    "price": 1000.00,
+    "image": "/images/cases/legendary.png",
+    "items": [
+      {
+        "id": "item-knife-01",
+        "name": "Karambit | Bat Shadow",
+        "rarity": "Extraordinary",
+        "price": 5000.00,
+        "dropChance": 0.02
+      }
+    ]
+  }
+]
