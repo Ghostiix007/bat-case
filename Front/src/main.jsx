@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+  import React, { useEffect, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   AlertTriangle,
@@ -63,16 +63,26 @@ const apiClient = {
   getSession: () => api("/api/auth/me"),
   logout: () => api("/api/auth/logout", { method: "POST" }),
   getState: () => api("/api/user/state"),
+  getCases: () => api("/api/cases"),
+  getSkins: () => api("/api/skins"),
   openCases: (caseId, count) => api(`/api/cases/${caseId}/open`, { method: "POST", body: JSON.stringify({ count }) }),
-  sellItems: (itemIds) => api("/api/inventory/sell", { method: "POST", body: JSON.stringify({ itemIds }) }),
+  sellItem: (itemId) => api(`/api/inventory/${itemId}/sell`, { method: "POST" }),
+  sellItems: async (itemIds) => {
+    let data = {};
+    for (const itemId of itemIds) {
+      data = await api(`/api/inventory/${itemId}/sell`, { method: "POST" });
+    }
+    return data;
+  },
   sellAll: () => api("/api/inventory/sell-all", { method: "POST" }),
-  upgrade: (itemId, targetName) => api("/api/upgrade", { method: "POST", body: JSON.stringify({ itemId, targetName }) }),
+  upgrade: (itemId, targetSkinName) => api("/api/upgrade", { method: "POST", body: JSON.stringify({ itemId, targetSkinName }) }),
   deposit: (amount, method) => api("/api/deposit", { method: "POST", body: JSON.stringify({ amount, method }) }),
   adminLogin: (login, password) => api("/api/admin/login", { method: "POST", body: JSON.stringify({ login, password }) }),
-  adminSetBalance: (userId, balance) => api(`/api/admin/users/${userId}/balance`, { method: "PATCH", body: JSON.stringify({ balance }) }),
+  adminGetUsers: () => api("/api/admin/users"),
+  adminSetBalance: (userId, balance) => api(`/api/admin/users/${userId}`, { method: "PATCH", body: JSON.stringify({ balance }) }),
   adminSetCasePrice: (caseId, price) => api(`/api/admin/cases/${caseId}`, { method: "PATCH", body: JSON.stringify({ price }) }),
-  adminAddDrop: (caseId, skin) => api(`/api/admin/cases/${caseId}/drops`, { method: "POST", body: JSON.stringify({ skin }) }),
-  adminRemoveDrop: (caseId, skin) => api(`/api/admin/cases/${caseId}/drops/${encodeURIComponent(skin)}`, { method: "DELETE" }),
+  adminAddDrop: (caseId, skinName) => api(`/api/admin/cases/${caseId}/drops`, { method: "POST", body: JSON.stringify({ skinName }) }),
+  adminRemoveDrop: (caseId, skinName) => api(`/api/admin/cases/${caseId}/drops`, { method: "DELETE", body: JSON.stringify({ skinName }) }),
 };
 
 // Внутрішня валюта — cr; курс конвертації для відображення: 1 cr = $1.
@@ -679,7 +689,10 @@ function App() {
   const [activeType, setActiveType] = useState("all");
   const [inventory, setInventory] = useState([]);
   const [balance, setBalance] = useState(30);
+  const [caseList, setCaseList] = useState(cases);
   const [selectedCase, setSelectedCase] = useState(cases[0]);
+  const [freeCaseAvailable, setFreeCaseAvailable] = useState(true);
+  const [skinsVersion, setSkinsVersion] = useState(0);
   const [lastDrop, setLastDrop] = useState(null);
   const [openResult, setOpenResult] = useState(null);
   const [upgradeResult, setUpgradeResult] = useState(null);
@@ -707,18 +720,18 @@ function App() {
   const caseGroupKey = (item) => (item.price === 0 ? "free" : item.type);
 
   const filteredCases = useMemo(() => {
-    if (activeType === "all") return cases;
-    return cases.filter((item) => caseGroupKey(item) === activeType);
-  }, [activeType]);
+    if (activeType === "all") return caseList;
+    return caseList.filter((item) => caseGroupKey(item) === activeType);
+  }, [activeType, caseList]);
 
   const groupedCases = useMemo(() => {
     return caseTypes
       .filter((type) => type.id !== "all")
       .map((type) => ({
         ...type,
-        cases: cases.filter((item) => caseGroupKey(item) === type.id),
+        cases: caseList.filter((item) => caseGroupKey(item) === type.id),
       }));
-  }, []);
+  }, [caseList]);
 
   const upgradeTargets = useMemo(() => {
     const allSkins = Object.entries(skinCatalog)
@@ -742,7 +755,7 @@ function App() {
       .slice(0, 8);
 
     return pool.length ? pool : pricier.sort((a, b) => a.price - b.price).slice(0, 8);
-  }, [selectedItem, upgradeMultiplier]);
+  }, [selectedItem, upgradeMultiplier, skinsVersion]);
 
   useEffect(() => {
     if (upgradeTargets.length && !upgradeTargets.some((target) => target.name === selectedTarget?.name)) {
@@ -774,10 +787,15 @@ function App() {
 
     let rolledItems;
     if (API_ENABLED) {
+      if (!steamProfile) {
+        setOpenResult({ crate, item: null, items: [], error: "Увійди через Steam, щоб відкривати кейси." });
+        return;
+      }
       try {
         const data = await apiClient.openCases(crate.id, amount);
         rolledItems = data.items;
         if (typeof data.balance === "number") setBalance(data.balance);
+        if (data.freeCaseUsed) setFreeCaseAvailable(false);
       } catch (error) {
         setIsOpening(false);
         setOpenResult({ crate, item: null, items: [], error: error.message });
@@ -852,10 +870,14 @@ function App() {
 
   const runUpgrade = async () => {
     if (!selectedItem || isUpgrading) return;
+    if (API_ENABLED && !steamProfile) {
+      alert("Увійди через Steam, щоб виконувати апгрейд.");
+      return;
+    }
 
     const inputItem = selectedItem;
     const targetItem = selectedTarget;
-    const chance = calculateUpgradeChance(inputItem, targetItem);
+    let chance = calculateUpgradeChance(inputItem, targetItem);
     let roll = Math.round((Math.random() * 100 + Number.EPSILON) * 10) / 10;
     let won = roll <= chance;
     let resultItem = null;
@@ -869,6 +891,7 @@ function App() {
         const data = await apiClient.upgrade(inputItem.id, targetItem.name);
         won = Boolean(data.won);
         if (typeof data.roll === "number") roll = data.roll;
+        if (typeof data.chance === "number") chance = data.chance;
         if (data.item) resultItem = data.item;
         if (Array.isArray(data.inventory)) serverInventory = data.inventory;
       } catch (error) {
@@ -924,10 +947,11 @@ function App() {
         setIsAdmin(true);
         setAdminLogin("");
         setAdminPassword("");
-        return;
       } catch (error) {
         console.error("Admin login failed:", error);
+        alert("Невірний логін або пароль");
       }
+      return;
     }
     if (login === "admin" && password === "admin") {
       setIsAdmin(true);
@@ -938,7 +962,14 @@ function App() {
     }
   };
 
-  const handleAdminLogout = () => {
+  const handleAdminLogout = async () => {
+    if (API_ENABLED) {
+      try {
+        await apiClient.logout();
+      } catch (error) {
+        console.error("Admin logout failed:", error);
+      }
+    }
     setIsAdmin(false);
     setActiveView("auth");
   };
@@ -953,26 +984,25 @@ function App() {
   };
 
   const updateCasePrice = (caseId, newPrice) => {
-    const updatedCases = cases.map((crate) => (crate.id === caseId ? { ...crate, price: newPrice } : crate));
-    // Update the selected case if it's the one being edited
-    if (selectedCase.id === caseId) {
-      setSelectedCase(updatedCases.find(c => c.id === caseId));
+    setCaseList((prev) => prev.map((crate) => (crate.id === caseId ? { ...crate, price: newPrice } : crate)));
+    if (selectedCase?.id === caseId) {
+      setSelectedCase((prev) => ({ ...prev, price: newPrice }));
     }
     if (API_ENABLED) apiClient.adminSetCasePrice(caseId, newPrice).catch((error) => console.error("Case price update failed:", error));
   };
 
   const addSkinToCase = (caseId, skinName) => {
-    const updatedCases = cases.map((crate) => (crate.id === caseId ? { ...crate, drops: [...crate.drops, skinName] } : crate));
-    if (selectedCase.id === caseId) {
-      setSelectedCase(updatedCases.find(c => c.id === caseId));
+    setCaseList((prev) => prev.map((crate) => (crate.id === caseId ? { ...crate, drops: [...crate.drops, skinName] } : crate)));
+    if (selectedCase?.id === caseId) {
+      setSelectedCase((prev) => ({ ...prev, drops: [...prev.drops, skinName] }));
     }
     if (API_ENABLED) apiClient.adminAddDrop(caseId, skinName).catch((error) => console.error("Add drop failed:", error));
   };
 
   const removeSkinFromCase = (caseId, skinName) => {
-    const updatedCases = cases.map((crate) => (crate.id === caseId ? { ...crate, drops: crate.drops.filter((skin) => skin !== skinName) } : crate));
-    if (selectedCase.id === caseId) {
-      setSelectedCase(updatedCases.find(c => c.id === caseId));
+    setCaseList((prev) => prev.map((crate) => (crate.id === caseId ? { ...crate, drops: crate.drops.filter((skin) => skin !== skinName) } : crate)));
+    if (selectedCase?.id === caseId) {
+      setSelectedCase((prev) => ({ ...prev, drops: prev.drops.filter((skin) => skin !== skinName) }));
     }
     if (API_ENABLED) apiClient.adminRemoveDrop(caseId, skinName).catch((error) => console.error("Remove drop failed:", error));
   };
@@ -992,9 +1022,31 @@ function App() {
     const loadState = async () => {
       if (!API_ENABLED) return;
       try {
+        const apiCases = await apiClient.getCases();
+        if (Array.isArray(apiCases) && apiCases.length) {
+          setCaseList(apiCases);
+          setSelectedCase((prev) => apiCases.find((c) => c.id === prev?.id || c.name === prev?.name) || apiCases[0]);
+        }
+      } catch (error) {
+        console.error("Failed to load cases:", error);
+      }
+      try {
+        const skins = await apiClient.getSkins();
+        if (Array.isArray(skins) && skins.length) {
+          skins.forEach((skin) => {
+            skinCatalog[skin.name] = { rarity: skin.rarity, price: Number(skin.price) };
+            if (skin.imageUrl) skinImages[skin.name] = skin.imageUrl;
+          });
+          setSkinsVersion((v) => v + 1);
+        }
+      } catch (error) {
+        console.error("Failed to load skins:", error);
+      }
+      try {
         const data = await apiClient.getState();
         if (typeof data.balance === "number") setBalance(data.balance);
         if (Array.isArray(data.inventory)) setInventory(data.inventory);
+        if (typeof data.freeCaseAvailable === "boolean") setFreeCaseAvailable(data.freeCaseAvailable);
       } catch (error) {
         console.error("Failed to load user state:", error);
       }
@@ -1016,6 +1068,14 @@ function App() {
       setActiveView("admin");
     }
   }, []);
+
+  useEffect(() => {
+    if (!API_ENABLED || !isAdmin) return;
+    apiClient
+      .adminGetUsers()
+      .then((data) => setUsers(data.formatedUsers || data.users || []))
+      .catch((error) => console.error("Failed to load users:", error));
+  }, [isAdmin]);
 
   return (
     <div className="app-shell">
@@ -1110,12 +1170,23 @@ function App() {
             balance={balance}
             onDeposit={async (amount, method) => {
               if (API_ENABLED) {
+                if (!steamProfile) {
+                  alert("Увійди через Steam, щоб поповнювати баланс.");
+                  return;
+                }
                 try {
                   const data = await apiClient.deposit(amount, method);
-                  if (typeof data.balance === "number") setBalance(data.balance);
+                  const newBalance = data?.result?.balance ?? data.balance;
+                  if (typeof newBalance === "number") {
+                    setBalance(newBalance);
+                  } else {
+                    const state = await apiClient.getState();
+                    if (typeof state.balance === "number") setBalance(state.balance);
+                  }
                   return;
                 } catch (error) {
                   console.error("Deposit failed:", error);
+                  return;
                 }
               }
               setBalance((prev) => prev + amount);
@@ -1132,7 +1203,7 @@ function App() {
             onUpdateCasePrice={updateCasePrice}
             onAddSkin={addSkinToCase}
             onRemoveSkin={removeSkinFromCase}
-            cases={cases}
+            cases={caseList}
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
             sortBy={sortBy}
@@ -1300,7 +1371,7 @@ function OpeningView({ balance, count, onOpen, onAgain, onBack, onKeep, onSelect
           <div className="error-icon">
             <AlertTriangle size={28} />
           </div>
-          <h2>Не вистачає кредитів</h2>
+          <h2>{result.error.includes("кредитів") ? "Не вистачає кредитів" : "Помилка"}</h2>
           <p>{result.error}</p>
           <button className="primary-action wide" onClick={onBack} type="button">
             До кейсів
@@ -1741,7 +1812,11 @@ function ProfileView({ balance, inventory, onSteamLogin, onSteamLogout, steamPro
     <section className="screen profile-screen">
       <div className="profile-card">
         {steamProfile ? (
-          <img alt={`${nickname} Steam avatar`} className="steam-avatar" src={steamProfile.avatar} />
+          steamProfile.avatar ? (
+            <img alt={`${nickname} Steam avatar`} className="steam-avatar" src={steamProfile.avatar} />
+          ) : (
+            <div className="avatar-tile">{(nickname || "S")[0].toUpperCase()}</div>
+          )
         ) : (
           <div className="avatar-tile">?</div>
         )}
@@ -2038,7 +2113,11 @@ function AuthView({ mode, onSteamLogin, onSteamLogout, setMode, steamProfile }) 
         <p>{content.subtitle}</p>
         {steamProfile ? (
           <div className="steam-connected-card">
-            <img alt={`${steamProfile.nickname} Steam avatar`} className="steam-avatar small" src={steamProfile.avatar} />
+            {steamProfile.avatar ? (
+              <img alt={`${steamProfile.nickname} Steam avatar`} className="steam-avatar small" src={steamProfile.avatar} />
+            ) : (
+              <div className="avatar-tile small">{(steamProfile.nickname || "S")[0].toUpperCase()}</div>
+            )}
             <div>
               <span>Signed in with Steam</span>
               <b>{steamProfile.nickname}</b>
