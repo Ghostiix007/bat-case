@@ -1,0 +1,20 @@
+{
+  "name": "aqa",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run && playwright test",
+    "test:api": "vitest run",
+    "test:e2e": "playwright test",
+    "lint": "echo \"No linter required for tests\""
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^22.0.0",
+    "@types/supertest": "^6.0.0",
+    "playwright": "^1.63.0",
+    "supertest": "^7.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^2.0.0"
+  }
+}

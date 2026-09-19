@@ -40,7 +40,7 @@ import {
 import "./index.css";
 
 // ─── Backend API layer ────────────────────────────────────────────────
-// Задай VITE_API_URL у .env (напр. http://localhost:3000), щоб фронт
+// Задай VITE_API_URL у .env (напр. http://localhost:5173)щоб фронт
 // ходив на реальний бекенд. Без нього працює локальний демо-стан.
 // Контракт ендпоінтів описаний у BACKEND_SPEC.md у корені репозиторію.
 const API_BASE = (import.meta.env.VITE_API_URL || "").replace(/\/$/, "");

@@ -1,0 +1,24 @@
+
+{
+  "validUser": {
+    "id": "usr-test-01",
+    "email": "player@batcase.io",
+    "password": "Password123!",
+    "role": "USER",
+    "balance": 1500.00
+  },
+  "lowBalanceUser": {
+    "id": "usr-test-02",
+    "email": "poor_player@batcase.io",
+    "password": "Password123!",
+    "role": "USER",
+    "balance": 5.00
+  },
+  "adminUser": {
+    "id": "usr-admin-01",
+    "email": "admin@batcase.io",
+    "password": "AdminSecurePassword123!",
+    "role": "ADMIN",
+    "balance": 99999.00
+  }
+}

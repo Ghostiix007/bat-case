@@ -1,0 +1,20 @@
+[
+  {
+    "inventoryItemId": "inv-item-101",
+    "userId": "usr-test-01",
+    "itemId": "item-skin-01",
+    "itemName": "AK-47 | Bat Night",
+    "price": 250.00,
+    "status": "IN_INVENTORY",
+    "droppedAt": "2026-09-12T20:00:00Z"
+  },
+  {
+    "inventoryItemId": "inv-item-102",
+    "userId": "usr-test-01",
+    "itemId": "item-skin-02",
+    "itemName": "Glock-18 | Dark Wing",
+    "price": 50.00,
+    "status": "SOLD",
+    "droppedAt": "2026-09-12T20:05:00Z"
+  }
+]
