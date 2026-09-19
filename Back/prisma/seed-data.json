@@ -1,0 +1,1294 @@
+{
+  "skins": [
+    {
+      "name": "P2000 | Granite Marbleized",
+      "weapon": "P2000",
+      "rarity": "industrial",
+      "price": 18,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL5lYayrXIL0Pq3V6N_If6aGmKvzedxuPUnHyvhkUh2tmuBztupdi2fPwclDMN1F-JctUTuwYDgYu3rslPdj9lHnjK-0H1HqokLtA"
+    },
+    {
+      "name": "Nova | Clear Polymer",
+      "weapon": "Nova",
+      "rarity": "milspec",
+      "price": 49,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0PyhfqVSMP-fF2qV09F6ueZhW2exxkR-tmWEmIyoJXyWZw4iDsclROVftxm7wIe1NbizswPe2YlHmCuvkGoXuVU3K7Ec"
+    },
+    {
+      "name": "M4A1-S | Basilisk",
+      "weapon": "M4A1-S",
+      "rarity": "restricted",
+      "price": 84,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GCMWrEwL9lj-NoXCC_nA4sjDGMnYftbyqVPwUiX5V5ReUDuxC5m9zmNOPktAHYiIgXzSz43C4a7Sg_6uZQVKU7uvqA7bOYRbA"
+    },
+    {
+      "name": "Five-SeveN | Capillary",
+      "weapon": "Five-SeveN",
+      "rarity": "industrial",
+      "price": 21,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRa7FSJvmFC3SV1-t4j_dsRieMmRQguynLmY79IinFbA90CZN2Q-Bc4UW6x9KyZLnjtQCMjo8WyXr7jy1O6Ck_sfFCD_SqR6qLvA"
+    },
+    {
+      "name": "AWP | Atheris",
+      "weapon": "AWP",
+      "rarity": "restricted",
+      "price": 125,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk7uW-V7JkMPWBMWuZxuZi_rZsS3zgzU8isW3dnIr6eHKfPVAhDpojEe9YsUW4xta1Nuzm5FDci4NbjXKpmWVQppo"
+    },
+    {
+      "name": "USP-S | Blueprint",
+      "weapon": "USP-S",
+      "rarity": "milspec",
+      "price": 72,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA0tF0vPRsXzu6mwkYvzSCkpu3IiqTZgAmCJIlRLEP5BXpxtPlMOOxswPZithFyyj3iyNPvCo96r1QBb1lpPPa5SpubA"
+    },
+    {
+      "name": "MP9 | Black Sand",
+      "weapon": "MP9",
+      "rarity": "industrial",
+      "price": 24,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f_jdk4uL3V6ZhIfOYMXSRz-pJvOhuRz39xxsj5GWDn9z6d3rCOFV1CJpwTO4IsEG8x4WzPr6xtlTZ2YlEzX-vhzQJsHjCKAg7iw"
+    },
+    {
+      "name": "Glock-18 | Moonrise",
+      "weapon": "Glock-18",
+      "rarity": "restricted",
+      "price": 93,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a7s2pZKtuK8_CVliF0-x3vt5kQCa9qhsipTiXpYPwJiPTcANzXJNyFOEMthXsktHhMLzl4FaK3toWn3iqhi9BvHw9su5UU6Zw-_bJz1aWcX-Jd_0"
+    },
+    {
+      "name": "M4A4 | Neo-Noir",
+      "weapon": "M4A4",
+      "rarity": "classified",
+      "price": 240,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afBSLvWcMWmfyPxJvOhuRz39wE1142vSztmvInvBOgV0W5R1FLYNuxW4wIbgNrmx4g2Kj4tMmCX93zQJsHgJr0dqFw"
+    },
+    {
+      "name": "CZ75-Auto | Polymer",
+      "weapon": "CZ75-Auto",
+      "rarity": "industrial",
+      "price": 18,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLyhMG1_B1a4s2tcrI_H_2VMWuZxuZi_rcwSnHjwxgh527SzI6oIHKUZ1dxA8ckTbUCskG6ldTuY-nh5FTf34JbjXKpj6qz0B4"
+    },
+    {
+      "name": "Sawed-Off | Wasteland Princess",
+      "weapon": "Sawed-Off",
+      "rarity": "milspec",
+      "price": 64,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLin4Hl-S1d6c2tfZt6MM-AD3CVxeFwtt5lRi67gVMksWuEmduuIH2fPwUkWJojQuMP5xi8lNzlY-234lDag4xFnin_jihN8G81tH9UxALW"
+    },
+    {
+      "name": "Driver Gloves | Queen Jaguar",
+      "weapon": "Driver Gloves",
+      "rarity": "covert",
+      "price": 620,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5T441rsfhr9kYDl7h1I4_utY5tnIfeGD3Wv2Ot6vO5-cCW6khUz_WSHm4qteC2XOg4jDcN0EOZbthDsxoDnN7m24laI3d8QnCv6hn5PvHx1o7FVsUpsiR4"
+    },
+    {
+      "name": "AUG | Momentum",
+      "weapon": "AUG",
+      "rarity": "classified",
+      "price": 185,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwi5Hf_jdk7uepV6liLfWdGnKd_uJ_t-l9ASi2zUp042SBno6sICrFbFMnCZR5EedftkPqk9ayMr_j71fXjo8XmXrgznQeFjVtTWM"
+    },
+    {
+      "name": "MAC-10 | Disco Tech",
+      "weapon": "MAC-10",
+      "rarity": "classified",
+      "price": 205,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1Y-s2jaac8cM-dD2SCxNF7teVgWiT9xht3tWzXy9j_eXuWagAlXJVxFOcI4BK7ltXmP-rltgCPjYhEnCuqhzQJsHgdu4rIbA"
+    },
+    {
+      "name": "M4A4 | The Emperor",
+      "weapon": "M4A4",
+      "rarity": "covert",
+      "price": 390,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiVI0P_6afBSJf2DC3Wf09F6ueZhW2exwBh_6m3dnt36InjDPQ4oXJt1TbJeshW_mtfjN-vrsgaKiokWy333kGoXuRj4z9Nd"
+    },
+    {
+      "name": "MP9 | Modest Threat",
+      "weapon": "MP9",
+      "rarity": "milspec",
+      "price": 36,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8js_f-jFk4uL3V6diLP-dFzfB_uNztOh8Qmfixh8mtTuGm9iocXKTbQEjWZAjRbNZshCwm9HvNLy04wPeidhCyX38kGoXua4ClY9d"
+    },
+    {
+      "name": "AK-47 | Asiimov",
+      "weapon": "AK-47",
+      "rarity": "covert",
+      "price": 430,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSIeOaB2qf19F6ueZhW2e2wEt-t2jcytf6dymSO1JxA5oiRecLsRa5kIfkYr-241aLgotHz3-rkGoXuUp8oX57"
+    },
+    {
+      "name": "AWP | Neo-Noir",
+      "weapon": "AWP",
+      "rarity": "covert",
+      "price": 410,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk7uW-V6poL_6cB3WvzedxuPUnHirrxR4l423SyI39I3KXPwdxWZclQeNZ5EXskYfnNeyw71OMi9lNzDK-0H3r66pOTw"
+    },
+    {
+      "name": "FAMAS | Meow 36",
+      "weapon": "FAMAS",
+      "rarity": "milspec",
+      "price": 52,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1c_M2oaalsM8-QAXWA_uNzv_ZWQyC0nQlp6jvVztaudCnEbAUgDsckFOAJsBLtlN2yP7zqslGMiooXyCX43H8Y5zErvbiVlZtU7g"
+    },
+    {
+      "name": "USP-S | Printstream",
+      "weapon": "USP-S",
+      "rarity": "covert",
+      "price": 510,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA_v5kue99XD2hkBwqjDGMnYftb3yUPFR0XsNyRrNc5kO5ltziMenr5lONj4kXyi2riywc7y9o5LtQAqQ7uvqAkScWnv4"
+    },
+    {
+      "name": "AK-47 | Ice Coaled",
+      "weapon": "AK-47",
+      "rarity": "classified",
+      "price": 260,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSI_-UGm-Zz-llj-1gSCGn2x4l5z_RyNj6JXnEbgFzXMYjEOUIsBe5m9exP-zg4leMj4pGxXn7jCJXrnE84asPq_0"
+    },
+    {
+      "name": "P250 | Cassette",
+      "weapon": "P250",
+      "rarity": "industrial",
+      "price": 19,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiFO0OL8PfRSI_GAHWKE1etJvOhuRz39lkwltT7Ww4ugc3PGOwd0DpQkQbUPshbpm93lMuy25QGIjIwUn3_72DQJsHjyHnRH0Q"
+    },
+    {
+      "name": "Desert Eagle | Printstream",
+      "weapon": "Desert Eagle",
+      "rarity": "covert",
+      "price": 520,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7OeRbKFsJ8-DHG6e1f1iouRoQha_nBovp3OGmdeqInyVP1V0XsYlRbEI50a5wNyzZr605AyI3t5MmCSohylAuC89_a9cBoMY9UkV"
+    },
+    {
+      "name": "Skeleton Knife | Tiger Tooth",
+      "weapon": "Skeleton Knife",
+      "rarity": "mythic",
+      "price": 950,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1I5PeibbBiLs-SAFiEyOlzot5mXSi9khgYvzSCkpu3dyjBagAlXMB4R-YOt0OxlIe2ZuuztQXdjNhAySn52i5Mv3tj5rlRUb1lpPPHmhG_Tw"
+    },
+    {
+      "name": "Tec-9 | Fuel Injector",
+      "weapon": "Tec-9",
+      "rarity": "classified",
+      "price": 190,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLlm5W5wiVI0Oara_1SM-WDC3WTye9kt-RtcCW6khUz_Wvcy9qgdCnEPQ8hApBzRrQJ4RW7moDgMLzktFDZiI5HnyWr3ChN5yp1o7FVg4hNKG8"
+    },
+    {
+      "name": "M4A1-S | Decimator",
+      "weapon": "M4A1-S",
+      "rarity": "classified",
+      "price": 225,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_eAMWrEwL9JtORqRiSygRI1jDGMnYftb3iUb1dxW5ImFLNftxCxktflZLm2tgaP2otGyn_-hytOvy9q5elQV_A7uvqA6CRSoZY"
+    },
+    {
+      "name": "AK-47 | Neon Rider",
+      "weapon": "AK-47",
+      "rarity": "covert",
+      "price": 470,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV6poL_6sHG6UxPxJveRtRjy-2x9_5GiBmYn4JHiVa1NyXMMkRuNe5ka5k9eyM-q2sQHc2NpCmyWvin5XrnE89iGyCXM"
+    },
+    {
+      "name": "M4A4 | Cyber Security",
+      "weapon": "M4A4",
+      "rarity": "classified",
+      "price": 210,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afBSI-mRC3WA1OB9j-xsSyCmmFN_5Tvdm9ypcXnGPQ8iXMYjF7EM50a8wdKzMOLntFfb3d5BnnmriH9N8G81tGbS0tGU"
+    },
+    {
+      "name": "AWP | Hyper Beast",
+      "weapon": "AWP",
+      "rarity": "covert",
+      "price": 490,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk7uW-V6x0MPWBMWWVwP1ij-1gSCGn20pxtm_WzNuoeHKeaFAnCZUiTe5bt0HqxofmZOrm5Q2IjoMQzS_5iShXrnE8NzWs__c"
+    },
+    {
+      "name": "Karambit | Lore",
+      "weapon": "Karambit",
+      "rarity": "mythic",
+      "price": 980,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Q7uCvZaZkNM-QG1ibwPx3vd5lQDu2qhEutDWR1IqrIHLCZlUmDJYlTLFb50HuwdyxPu2w4lCKjI5HniT2jS1PuCxj5e0cEf1y9ZCADXU"
+    },
+    {
+      "name": "Glock-18 | Vogue",
+      "weapon": "Glock-18",
+      "rarity": "restricted",
+      "price": 118,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1Y-s2pZKtuK8-WF2KTzuBiseJ9cCW6khUz_T-GyNavdCqRawN1CMFwTOcO5hO7loXiY-zmsQKPi44QzHj22ikcvy11o7FVfFOBmfY"
+    },
+    {
+      "name": "USP-S | Kill Confirmed",
+      "weapon": "USP-S",
+      "rarity": "covert",
+      "price": 460,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA_uV_vO1WTCa9kxQ1vjiBpYPwJiPTcFB2Xpp5TO5cskG9lYCxZu_jsVCL3o4Xnij23ClO5ik9tegFA_It8qHJz1aWe-uc160"
+    },
+    {
+      "name": "M9 Bayonet | Crimson Web",
+      "weapon": "M9 Bayonet",
+      "rarity": "mythic",
+      "price": 1080,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Wts2sab1iLvWHMW-J_vlzsvJWQyC0nQlp4GrWzYuqeHjDZlN1XJohTecO5xawwdDvNuLm5wPcjY0QzyX83Xsd7zErvbgxKe4lfw"
+    },
+    {
+      "name": "SSG 08 | Dragonfire",
+      "weapon": "SSG 08",
+      "rarity": "covert",
+      "price": 390,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1Y-s29e6M9eM-XHGaXzuBwufNscDqwmg0ijDGMnYftbyrFPVAoWcQjELQOuxO4k4e1N-nnsQfW2I5Mz3ivi3wb7Stj5ukAUKY7uvqAqS55_Pw"
+    },
+    {
+      "name": "AK-47 | Inheritance",
+      "weapon": "AK-47",
+      "rarity": "classified",
+      "price": 275,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNQ0OKheqdoLPGaAFicyOl-pK8xGH_nwUt1sGrSz9ivcHKQOAcjXMYkRu5Yuxe4lYCyZOq25VSM2oMT02yg2UxBSEgA"
+    },
+    {
+      "name": "Sport Gloves | Bronze Morph",
+      "weapon": "Sport Gloves",
+      "rarity": "mythic",
+      "price": 920,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk5UvzWCL2kpn2-DFk_OKherB0H-CcB3Sfz9Fwou5ucDu2kSIgoTiAlLD1KCzPKhghDJBzTLMCukW6kNblNe-2tlGKj45GyCWrii8f73k95e4HA_AjrvbSkUifZkDjXxpJ"
+    },
+    {
+      "name": "AWP | Gungnir",
+      "weapon": "AWP",
+      "rarity": "mythic",
+      "price": 1250,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6N4LvedB3WvzedxuPUnHnjnzUl0sWrdztitI3rDZgJzAsZ1QOFY4UPqldDgMO_l41HXit9AmTK-0H227dAsvQ"
+    },
+    {
+      "name": "AK-47 | Wild Lotus",
+      "weapon": "AK-47",
+      "rarity": "mythic",
+      "price": 1180,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV61-LPGdCliWzeFkse1WQyC0nQlpsDuGyt-pdnyRPA4hDcYkR-QPuhi-wdPuYbyx5AaMidkQnC_-2ilIuzErvbi4ijV5Mw"
+    },
+    {
+      "name": "Butterfly Knife | Fade",
+      "weapon": "Butterfly Knife",
+      "rarity": "mythic",
+      "price": 1320,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2avx-9ytd5lRi67gVNwsDvSwtqqc3iXZg4kCZYjReYLtRbum9XgYuvm5wbWjtgUzCn3iSsf8G81tFEeH9rw"
+    },
+    {
+      "name": "M4A4 | Howl",
+      "weapon": "M4A4",
+      "rarity": "mythic",
+      "price": 1100,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afVSKP-EAm6extF6ueZhW2exwkl2tmTXwt39eCiUPQR2DMN4TOVetUK8xoLgM-K341eM2otDnC6okGoXufBz_TAB"
+    },
+    {
+      "name": "AWP | Dragon Lore",
+      "weapon": "AWP",
+      "rarity": "mythic",
+      "price": 1400,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqYaF7IfysCnWRxuF4j-B-Xxa_nBovp3Pdwtj9cC_GaAd0DZdwQu9fuhS4kNy0NePntVTbjYpCyyT_3CgY5i9j_a9cBkcCWUKV"
+    },
+    {
+      "name": "Talon Knife | Marble Fade",
+      "weapon": "Talon Knife",
+      "rarity": "mythic",
+      "price": 1010,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1M5vahf6lsK_WBMWad_uN3ouNlSha1lBkijCqMnoDuHifOOV5kFJMlQecC4RW5x4bkMLvgsgGP2IIXzy_-iysaunlo4bwEBfYh_aLS3A7fcepqAVr8ibw"
+    },
+    {
+      "name": "USP-S | Orion",
+      "weapon": "USP-S",
+      "rarity": "covert",
+      "price": 380,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGJKz2lu_XuWbwcuyMESA4Fdl-4nnpU7iQA3-kKn17jJk_PuibapuJeLdWGLFwL8i4eVsFiqxxUt34jmHnoysJ3qVOAYgCJZwQrRb5EPul4XlYvSiuVIHgy4Xvg"
+    },
+    {
+      "name": "M4A1-S | Knight",
+      "weapon": "M4A1-S",
+      "rarity": "mythic",
+      "price": 790,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GeMWqV1e96o95lRi67gVNwsWTQzdn4JHyQZ1QhWMZyQe5YsxK-ktPnZOiwtVDcjo9ExS393ytB8G81tGXpYjdX"
+    },
+    {
+      "name": "Specialist Gloves | Fade",
+      "weapon": "Specialist Gloves",
+      "rarity": "mythic",
+      "price": 990,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk71ruQBH4jYLf-i5U-fe9V7d9JfOaD2uZ0vpJtuBtSha_nBovp3PQy42sdX6eagIjW5AlQOVetBXuk92xNLvg4gOMjd5AmC2ointB53w__a9cBqntWBk3"
+    },
+    {
+      "name": "Desert Eagle | Blaze",
+      "weapon": "Desert Eagle",
+      "rarity": "mythic",
+      "price": 840,
+      "imageUrl": "https://community.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7vORbqhsLfWAMWuZxuZi_uI_TX6wxxkjsGXXnImsJ37COlUoWcByEOMOtxa5kdXmNu3htVPZjN1bjXKpkHLRfQU"
+    },
+    {
+      "name": "AK-47 | Fire Serpent",
+      "weapon": "AK-47",
+      "rarity": "mythic",
+      "price": 1160,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0PSneqF-JeKDC2mE_u995LZWTTuygxIYvzSCkpu3cnvFPQB2DpUkROFY4Rntw93lP7i241DbiI1BxSuviHlKunk_6-sHU71lpPMTRLyP4Q"
+    },
+    {
+      "name": "Sport Gloves | Pandora's Box",
+      "weapon": "Sport Gloves",
+      "rarity": "mythic",
+      "price": 1220,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Tk5UvzWCL2kpn2-DFk_OKherB0H-CGHHecxNF6ueZhW2exk01w4j7cmYn4eHPCbAMhApdwTOIN5BPsx9yyYu605FTeid0Uy3j3kGoXueKyz5wo"
+    },
+    {
+      "name": "P90 | Death by Kitty",
+      "weapon": "P90",
+      "rarity": "restricted",
+      "price": 118,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf_jdk7PO6e694LPyAMXfJkdF6ueZhW2fgkUh042jUnN2geSqTaFN2CcQmQuRfsBXtxtfkN7mztASIg91Bniv8kGoXucYQxgOQ"
+    },
+    {
+      "name": "MP7 | Urban Hazard",
+      "weapon": "MP7",
+      "rarity": "industrial",
+      "price": 76,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf_jdk4uL5JadiLf2SAGOV09F6ueZhW2fgx0gl4WTczdj7I3LFaQYjDcQiE-Beuhe6xIXnP-_l41eKi9pEyH79kGoXuW6iY_I1"
+    },
+    {
+      "name": "UMP-45 | Exposure",
+      "weapon": "UMP-45",
+      "rarity": "restricted",
+      "price": 58,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkk4a0qB1Y-s27ZbQ5dc-LQ3WR2NF7seJhRie2qhEutDWR1Nutci2WbwBzWZFyF-Fetka_ltbgM7nh5AKKiYoRmXr73H4b7ilvsekcEf1y88bI5DM"
+    },
+    {
+      "name": "Nova | Hyper Beast",
+      "weapon": "Nova",
+      "rarity": "restricted",
+      "price": 66,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL_kYDhwiFO0PyhfqVSKOmDC3WSxO9lpN5lRi67gVMhsGrTmd2seH6XbA4pDZR1EbMCtES8m4fiNenl4FDcid1Az32ri3tM8G81tMCTwFwB"
+    },
+    {
+      "name": "SG 553 | Tiger Moth",
+      "weapon": "SG 553",
+      "rarity": "restricted",
+      "price": 69,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLimcO1qx1c_M29b_E4c8-HB2CV09F7v_VhcCW6khUz_TnWn9n7cyqRPQ52DpN3QLEPshjrw9zlY-jjs1bWioMQxSj8hyxJu3l1o7FVwqXqqnE"
+    },
+    {
+      "name": "XM1014 | Tranquility",
+      "weapon": "XM1014",
+      "rarity": "restricted",
+      "price": 70,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLpk8ewrHZk7OeRcKk8cKHHMWSR0-disfJWQyC0nQlp5zjWnNigIC-falMlWMN2F-cP5Ba-xoXlMri0swTZg41EyX34jS1LuDErvbgNI5zBZg"
+    },
+    {
+      "name": "SCAR-20 | Bloodsport",
+      "weapon": "SCAR-20",
+      "rarity": "restricted",
+      "price": 74,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLinZfyr3Jk6OGRe6dsMqLDMWWczuFyo_FmXT2MmRQguynLnoqrcHPCaFdzDMF5F-8P4Bbum9fkYuvrsVffjI5AyS75inlL5ixjsvFCD_R20nqesQ"
+    },
+    {
+      "name": "G3SG1 | Flux",
+      "weapon": "G3SG1",
+      "rarity": "restricted",
+      "price": 75,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2zYXnrB1c_M2pO7dqcc-VAnKI_v5jovFlSha_nBovp3ODz9uoc3vGOgMmApp3QrFe5xftm9bjNOm24Afb3YlBn3mqjS8dvy1p_a9cBmtTF-_C"
+    },
+    {
+      "name": "Five-SeveN | Monkey Business",
+      "weapon": "Five-SeveN",
+      "rarity": "restricted",
+      "price": 82,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3l4Dl7idN6vyRa7FSJvmFC3SV1-t4j-NoQSi9lCIrujqNjsGheXmXPQcoWMFzEO5ZtUOwkILjY7yzsg3ci91DySiohn4buCht4eYET-N7rZVO80Su"
+    },
+    {
+      "name": "P90 | Shallow Grave",
+      "weapon": "P90",
+      "rarity": "restricted",
+      "price": 85,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhx8bf-jFk_6v-V7dlIfyfAXCvxvx3puRWQyC0nQlpsWzUyIqvcCiVPFQnW8YmEO4P5xi6xNS2Num35FbX34lCzX7_hytK5zErvbi02RizsA"
+    },
+    {
+      "name": "FAMAS | Roll Cage",
+      "weapon": "FAMAS",
+      "rarity": "restricted",
+      "price": 88,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1c_M2oaalsM8-BD2uc2NF6ueZhW2exzUhz4WjWmNqpdy-UbwJxDJtxReEMtRGwloflP7m04wfXi94QyXj9kGoXuV3JhaXD"
+    },
+    {
+      "name": "MP7 | Bloodsport",
+      "weapon": "MP7",
+      "rarity": "restricted",
+      "price": 110,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8jsHf-jFk4uL5V6ZhL_-XHXef0_pJvOhuRz39lxsk4W3Ry96pIHrFOgElDZN2Q-9etUSwk4LnYu3h5wLejYwWxSr43zQJsHiIGMoJQA"
+    },
+    {
+      "name": "Glock-18 | Water Elemental",
+      "weapon": "Glock-18",
+      "rarity": "classified",
+      "price": 155,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1Y-s2pZKtuK72fB3aFxP11te99cCW6khUz_TjVyompc3-QOFR2DJQkFOMJtBbqk9LlY-7n5QLZjtkTxCWqhixPv311o7FVIf8eASQ"
+    },
+    {
+      "name": "P250 | See Ya Later",
+      "weapon": "P250",
+      "rarity": "classified",
+      "price": 162,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLhzMOwwiFO0OL8PfRSI-mRC3WT0-F1j-1gSCGn2x9ytmzWnN6pInjGOwMlDZp0EORe5BHsx93lP7zr5wzbiI5AyXr_jS9XrnE8gQrIgng"
+    },
+    {
+      "name": "Desert Eagle | Kumicho Dragon",
+      "weapon": "Desert Eagle",
+      "rarity": "classified",
+      "price": 168,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7uORbKF-JeKHC2aXzetJu_RkRiq7mhk1sjqKlLD1KCzPKhh0CcBwQLVe5BHrloKyZOnr5w3XiYhDnC39iCpK7X1psrlUWaFw8qXekUifZlV_fDVZ"
+    },
+    {
+      "name": "FAMAS | Djinn",
+      "weapon": "FAMAS",
+      "rarity": "classified",
+      "price": 172,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL3n5vh7h1a_s2oaalsM8-ZB2me_uJ_t-l9AXzhwxt-5TiAzdmgd3yeaQ50DZRxEe5b4BXrm4HkPr7kslfcg9pCznjgznQepOOy8CM"
+    },
+    {
+      "name": "USP-S | Neo-Noir",
+      "weapon": "USP-S",
+      "rarity": "classified",
+      "price": 178,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsG3SA0tF4v-h7cCW6khUz_WXdmd-vI3uRPwEkApR4QuBcu0Xrk4biYr_mtQXdidlCz3r63Ska7Hx1o7FVWuokIcU"
+    },
+    {
+      "name": "MAC-10 | Neon Rider",
+      "weapon": "MAC-10",
+      "rarity": "classified",
+      "price": 188,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8n5WxrR1Y-s2jaac8cM-dC2ie0-dytfNWQyC0nQlp5DzTntmgdC7COABxX5NxQrUOtUS5w4LgMu6zsVCK2IJCmyisjitM6DErvbicsEA0SQ"
+    },
+    {
+      "name": "M4A4 | Desolate Space",
+      "weapon": "M4A4",
+      "rarity": "classified",
+      "price": 195,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0P_6afBSJPWAAWuR1etJo_FoTCyMmRQguynLnNepJXPEaQJyDZJ0QOdbsxi7ktS0Y-Li4ADegthGn32ojCJJ7CxosfFCD_SyjfEkHg"
+    },
+    {
+      "name": "AWP | Electric Hive",
+      "weapon": "AWP",
+      "rarity": "classified",
+      "price": 215,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf9Ttk5_u4bZthKfebGinElLtytLVtG362x05wsWyByt2scHrGOgd1WZJ1ROBc4xi_ld3gNO7g-UWA3Kwc2RVq"
+    },
+    {
+      "name": "AK-47 | Point Disarray",
+      "weapon": "AK-47",
+      "rarity": "classified",
+      "price": 235,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSMP-aAHOvxedlsfN7TjCMmRQguynLnIz_dXnEbFcoDsNzQLMN40S7mte0Zuzl5gbY34JEnnr52ChA7ytisPFCD_Rw7udDlA"
+    },
+    {
+      "name": "M4A1-S | Golden Coil",
+      "weapon": "M4A1-S",
+      "rarity": "classified",
+      "price": 248,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_eAMWrEwL9lj_JnTiK2lxQztgKClYP9HifOOV5kFJclQ-Jb5xW-m9CxPuLq4QTfjd0XzyX6jCpL6X5o5OgDVfYn_a2Ci1rfcepqgV49FrE"
+    },
+    {
+      "name": "AK-47 | Redline",
+      "weapon": "AK-47",
+      "rarity": "classified",
+      "price": 265,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSI_-RHGavzedxuPUnFniykEtzsWWBzoyuIiifaAchDZUjTOZe4RC_w4buM-6z7wzbgokUyzK-0H08hRGDMA"
+    },
+    {
+      "name": "SSG 08 | Blood in the Water",
+      "weapon": "SSG 08",
+      "rarity": "classified",
+      "price": 286,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLijZGwpR1Y-s29YKV_K8-fB2CY1aAmsbFtFnDilkUl5j7UzoqsInmVaFd0XMMlELYDshbuxNPvP-yxtlCMlcsbmlWiixNl"
+    },
+    {
+      "name": "M4A4 | Bullet Rain",
+      "weapon": "M4A4",
+      "rarity": "covert",
+      "price": 298,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0PC7ZKhoNM-BD26e_uMisbBWQyC0nQlp4GmGydioIH3DPFMjDMd2QrQO5hDtkNK2Ne_htAXd3d0Uyiiriysb5zErvbh6fsb98Q"
+    },
+    {
+      "name": "USP-S | Caiman",
+      "weapon": "USP-S",
+      "rarity": "covert",
+      "price": 315,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLkjYbf7itX6vytbbZSI-WsBWaZzO94j-1gSCGn20t-4WyBn4mocC6XbVN0CMB2RLYMsUG5x9DgN-20tQSNiI1GzS2q3XtXrnE8NAiGp64"
+    },
+    {
+      "name": "Desert Eagle | Golden Koi",
+      "weapon": "Desert Eagle",
+      "rarity": "covert",
+      "price": 320,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL1m5fn8Sdk7v-Re6dsLPWAMWWCwPh5j-1gSCGn20om6jyGw9qgJHmQaAcgC8MmR7IMthm5m4W2M7zj7wOIj4pGn32o23hXrnE8VHBG1O4"
+    },
+    {
+      "name": "AK-47 | Case Hardened",
+      "weapon": "AK-47",
+      "rarity": "covert",
+      "price": 340,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiNK0P2nZKFpH_yaCW-Ej7sk5bE8Sn-2lEpz4zndzoyvdHuUPwFzWZYiE7EK4Bi4k9TlY-y24FbAy9USGSiZd5Q"
+    },
+    {
+      "name": "AK-47 | Bloodsport",
+      "weapon": "AK-47",
+      "rarity": "covert",
+      "price": 356,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI0POlPPNSIvycAWOD0eFkpN5lRi67gVN15mmDw9egci_EPFAkDMQlTeZe4EXplNa0Yrvr5wbd345GyHioiC4b8G81tFuqg_k_"
+    },
+    {
+      "name": "AWP | Oni Taiji",
+      "weapon": "AWP",
+      "rarity": "covert",
+      "price": 372,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk7uW-V6xsLv6KD1icyOl-pK9vGCqwkx524G_WnNmsInyXOAVyXJJ0TbNb5EOxxIflYbzj4gDdiNlC02yg2XaKgrAq"
+    },
+    {
+      "name": "AWP | Lightning Strike",
+      "weapon": "AWP",
+      "rarity": "covert",
+      "price": 385,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_C9k4_upYLBjKf6UMWaH0dF6ueZhW2frwU1_sW2EmNyvc32RZwMpCpcjQ-EJ4xbtmt3gYezk4wzb3tpAy3mrkGoXubsGIfVN"
+    },
+    {
+      "name": "AK-47 | Vulcan",
+      "weapon": "AK-47",
+      "rarity": "covert",
+      "price": 445,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlPPNSMuWRDGKC_uJ_t-l9AXCxxEh14zjTztivci2ePQZ2W8NzTecD4BKwloLiYeqxtAOIj9gUyyngznQeF7I6QE8"
+    },
+    {
+      "name": "M4A1-S | Hot Rod",
+      "weapon": "M4A1-S",
+      "rarity": "covert",
+      "price": 488,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwjFS4_ega6F_H_GdMXWVxdF75OA4XBa_nBovp3PXyt2uJ32QaQciDZUhReUM5hLskdy2Pu_n4wLe2doXm3j-2i5A7X5i_a9cBuWkb97d"
+    },
+    {
+      "name": "M4A4 | Poseidon",
+      "weapon": "M4A4",
+      "rarity": "covert",
+      "price": 530,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL8ypexwiFO0OKhe6FkJP-dMWuZxuZi_uM9Sn23xkx_sG3VyNyqcnnFZgchDMYjQuMJtRHuw9PvZuPjtlCI3d9bjXKpHL2aoaM"
+    },
+    {
+      "name": "Glock-18 | Fade",
+      "weapon": "Glock-18",
+      "rarity": "covert",
+      "price": 575,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL2kpnj9h1a7s2oaaBoH_yaCW-Ej-8u5bZvHnq1w0Vz62TUzNj4eCiVblMmXMAkROJeskLpkdXjMrzksVTAy9US8PY25So"
+    },
+    {
+      "name": "Shadow Daggers | Crimson Web",
+      "weapon": "Shadow Daggers",
+      "rarity": "mythic",
+      "price": 640,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1L-uGmV6x0H-eWDHSvzedxuPUnHi3mkRx24j_cn4qgIHnGbwF0A5p1R7UI5xm-k9XnMrjq5gOPj95BxDK-0H2triMq-g"
+    },
+    {
+      "name": "Flip Knife | Gamma Doppler",
+      "weapon": "Flip Knife",
+      "rarity": "mythic",
+      "price": 720,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1d4_u-V6VgH_eSA2qR_up5oPFlSjuMhRUmoDjRpYPwJiPTcFN2XJshE-ZfuhS-w9PgMuuxtQTZ2YoRzXj_3Ssf6ntp6rxWUass-KDJz1aW7hm8L5o"
+    },
+    {
+      "name": "Huntsman Knife | Fade",
+      "weapon": "Huntsman Knife",
+      "rarity": "mythic",
+      "price": 740,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1P7vG6YadsLM-SD1iWwOpzj-1gSCGn2x8hsW6DmIqpcXjBZgYkCZt5F7VcthS8ldS2Nr7m5VCMi4gRyyuqjHtXrnE8oar8MtU"
+    },
+    {
+      "name": "Driver Gloves | Crimson Weave",
+      "weapon": "Driver Gloves",
+      "rarity": "mythic",
+      "price": 760,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5T441rsfhr9kYDl7h1I4_utY5t_JfSsAm6Xyfo4trVoSnGxlh9x5DmEzt6rJS2RagYiA5siQ-MLthW9xtDlM7uxtFCNgpUFk3thcTnRAg"
+    },
+    {
+      "name": "AK-47 | Panthera onca",
+      "weapon": "AK-47",
+      "rarity": "mythic",
+      "price": 830,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiFO0POlV65sJ-WSHFicyOl-pK9sSS-2wEV25z_Qw4mqcn3EOgclCpJ3TbRctELtm9HmNLix4wHc3o5H02yg2Q50xEQx"
+    },
+    {
+      "name": "Bayonet | Autotronic",
+      "weapon": "Bayonet",
+      "rarity": "mythic",
+      "price": 860,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLzn4_v8ydP0PW9V6ZsOf-dC3OvwPtiv_V7QCe6liIrujqNjsGodirBZlckD5B1FLMDtka7m9DuZL7i4ADf39lNxSqqjXgc5ihstrkAT-N7rfe3-Xhk"
+    },
+    {
+      "name": "Hand Wraps | Cobalt Skulls",
+      "weapon": "Hand Wraps",
+      "rarity": "mythic",
+      "price": 880,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu4vx603vRA_Olpfu-TVJ7uK9V6xsLvSEHGaA_uJzsfVhSjuqqhsmsS-MmbD7LT7CAUV7T84sBohW60fg1srnZb6zsw2Ng41MmST43C1L7is9574CBKIh_q2Big_IMOdutcNRd_iuU13QD7PQAmaY"
+    },
+    {
+      "name": "AWP | Medusa",
+      "weapon": "AWP",
+      "rarity": "mythic",
+      "price": 890,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf_jdk4veqfbdsH_GEHlicyOl-pK85TC23wk12tWSGnNr6JXqRPVUnA5J5RLIKshS-l4HuYbji7lfajdgU02yg2bOcOBD3"
+    },
+    {
+      "name": "Moto Gloves | Spearmint",
+      "weapon": "Moto Gloves",
+      "rarity": "mythic",
+      "price": 1050,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu4r7_lb1QgTykpPf-i5U-fe9V6liNP-BDX6TzetJvehnWxanhxQmvTqJn7D1KCzPKhgnW5UmRO4DsxXrlYbhPurmtAXai98UzS73in5I6S5p4OsAU_Zx-KHWkUifZsxBQgc2"
+    },
+    {
+      "name": "AWP | The Prince",
+      "weapon": "AWP",
+      "rarity": "mythic",
+      "price": 1150,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6FjIf2WAlicyOl-pK9qHXHkw093sGvTw4uqJSnDPQAkCsNyEbZcshiwxtK0Yumz4gbX2o9C02yg2f5NtC8l"
+    },
+    {
+      "name": "AK-47 | Gold Arabesque",
+      "weapon": "AK-47",
+      "rarity": "mythic",
+      "price": 1240,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwlcK3wiVI0POlPPNSJ_-fCliR0-90tfJ4WiyMmRQguynLntmvICieOARzCpMhF-BYsRe-xoHvYu_g5lSNj4NDyy2viCwY6Hlu5_FCD_Q1jEqYuQ"
+    },
+    {
+      "name": "AWP | Desert Hydra",
+      "weapon": "AWP",
+      "rarity": "mythic",
+      "price": 1280,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyLwiYbf-jFk7uW-V6x0JOKSMWuZxuZi_uA7Syu2w0Ry4mqGzYypeH3DaAEnCpt0FuAK4RjrkoDgMb7mtFfcit5bjXKpX4RFZcA"
+    },
+    {
+      "name": "Karambit | Doppler",
+      "weapon": "Karambit",
+      "rarity": "mythic",
+      "price": 1380,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Q7uCvZaZkNM-SA1iDwP5muOh7Sha-lA8lvziMgIr9HifOOV5kFMRxFuEM5hi_xNXhMbmx5VCMjd9MyCv6jigc6n064ucLAvZ3_6bViV3fcepqpLtspE0"
+    },
+    {
+      "name": "Butterfly Knife | Doppler",
+      "weapon": "Butterfly Knife",
+      "rarity": "mythic",
+      "price": 1450,
+      "imageUrl": "https://community.akamai.steamstatic.com/economy/image/i0CoZ81Ui0m-9KwlBY1L_18myuGuq1wfhWSaZgMttyVfPaERSR0Wqmu7LAocGIGz3UqlXOLrxM-vMGmW8VNxu5Dx60noTyL6kJ_m-B1Z-ua6bbZrLOmsD2qv0u9moOlgXSyMmBw1sTGAk5X8JRTFAVp5Xco0W-ENtRXswYC1Mu_ks1fdjN9EyiqthiMbvHtv5btQBPck-KbT2gnHM-Ajoc5Ufn65u8U"
+    }
+  ],
+  "cases": [
+    {
+      "id": "starter-free",
+      "name": "Starter Case",
+      "type": "default",
+      "code": "FREE",
+      "price": 0,
+      "volatility": "Low",
+      "accent": "#4db57d",
+      "drops": [
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "CZ75-Auto | Polymer"
+      ]
+    },
+    {
+      "id": "op-bravo",
+      "name": "Operation Bravo",
+      "type": "default",
+      "code": "DP-001",
+      "price": 24,
+      "volatility": "Low",
+      "accent": "#4db57d",
+      "drops": [
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess",
+        "Driver Gloves | Queen Jaguar",
+        "P90 | Death by Kitty",
+        "MP7 | Urban Hazard",
+        "Sawed-Off | Black Sand",
+        "MP5-SD | Kitbash",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream"
+      ]
+    },
+    {
+      "id": "spectrum",
+      "name": "Spectrum",
+      "type": "default",
+      "code": "SP-025",
+      "price": 34,
+      "volatility": "Low",
+      "accent": "#69d2ff",
+      "drops": [
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess",
+        "Driver Gloves | Queen Jaguar",
+        "P90 | Death by Kitty",
+        "MP7 | Urban Hazard",
+        "Sawed-Off | Black Sand",
+        "MP5-SD | Kitbash",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire"
+      ]
+    },
+    {
+      "id": "clutch",
+      "name": "Clutch",
+      "type": "default",
+      "code": "CL-017",
+      "price": 46,
+      "volatility": "Mid",
+      "accent": "#e94a5f",
+      "drops": [
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess",
+        "Driver Gloves | Queen Jaguar",
+        "P90 | Death by Kitty",
+        "MP7 | Urban Hazard",
+        "Sawed-Off | Black Sand",
+        "MP5-SD | Kitbash",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream"
+      ]
+    },
+    {
+      "id": "glove",
+      "name": "Glove Case",
+      "type": "default",
+      "code": "GL-013",
+      "price": 82,
+      "volatility": "Mid",
+      "accent": "#d2b47d",
+      "drops": [
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess",
+        "Driver Gloves | Queen Jaguar",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "P90 | Death by Kitty",
+        "MP7 | Urban Hazard",
+        "Sawed-Off | Black Sand",
+        "MP5-SD | Kitbash",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire"
+      ]
+    },
+    {
+      "id": "prisma",
+      "name": "Prisma",
+      "type": "tactical",
+      "code": "PR-031",
+      "price": 58,
+      "volatility": "Mid",
+      "accent": "#c66cff",
+      "drops": [
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream",
+        "AK-47 | Ice Coaled",
+        "P250 | Cassette",
+        "Desert Eagle | Printstream",
+        "Skeleton Knife | Tiger Tooth",
+        "Tec-9 | Fuel Injector",
+        "M4A1-S | Decimator",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess"
+      ]
+    },
+    {
+      "id": "danger-zone",
+      "name": "Danger Zone",
+      "type": "tactical",
+      "code": "DZ-009",
+      "price": 66,
+      "volatility": "High",
+      "accent": "#ff8d46",
+      "drops": [
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream",
+        "AK-47 | Ice Coaled",
+        "P250 | Cassette",
+        "Desert Eagle | Printstream",
+        "Skeleton Knife | Tiger Tooth",
+        "Tec-9 | Fuel Injector",
+        "M4A1-S | Decimator",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion"
+      ]
+    },
+    {
+      "id": "recoil",
+      "name": "Recoil",
+      "type": "tactical",
+      "code": "RC-044",
+      "price": 74,
+      "volatility": "Mid",
+      "accent": "#69e0b0",
+      "drops": [
+        "FAMAS | Meow 36",
+        "USP-S | Printstream",
+        "AK-47 | Ice Coaled",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "P250 | Cassette",
+        "Desert Eagle | Printstream",
+        "Skeleton Knife | Tiger Tooth",
+        "Tec-9 | Fuel Injector",
+        "M4A1-S | Decimator",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint",
+        "MP9 | Black Sand",
+        "Glock-18 | Moonrise",
+        "M4A4 | Neo-Noir",
+        "CZ75-Auto | Polymer",
+        "Sawed-Off | Wasteland Princess"
+      ]
+    },
+    {
+      "id": "fracture",
+      "name": "Fracture",
+      "type": "tactical",
+      "code": "FR-037",
+      "price": 92,
+      "volatility": "High",
+      "accent": "#ff5b4a",
+      "drops": [
+        "P250 | Cassette",
+        "Desert Eagle | Printstream",
+        "Skeleton Knife | Tiger Tooth",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream",
+        "AK-47 | Ice Coaled",
+        "Tec-9 | Fuel Injector",
+        "M4A1-S | Decimator",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion"
+      ]
+    },
+    {
+      "id": "neon-grid",
+      "name": "Neon Grid",
+      "type": "premium",
+      "code": "NG-101",
+      "price": 124,
+      "volatility": "Mid",
+      "accent": "#00d0ff",
+      "drops": [
+        "Tec-9 | Fuel Injector",
+        "M4A1-S | Decimator",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir",
+        "FAMAS | Meow 36",
+        "USP-S | Printstream",
+        "AK-47 | Ice Coaled",
+        "P250 | Cassette",
+        "Desert Eagle | Printstream",
+        "Skeleton Knife | Tiger Tooth"
+      ]
+    },
+    {
+      "id": "bat-elite",
+      "name": "Bat Elite",
+      "type": "premium",
+      "code": "CE-115",
+      "price": 150,
+      "volatility": "High",
+      "accent": "#46d690",
+      "drops": [
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "AK-47 | Neon Rider",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Specialist Gloves | Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat"
+      ]
+    },
+    {
+      "id": "bloodline",
+      "name": "Bloodline",
+      "type": "premium",
+      "code": "BL-122",
+      "price": 165,
+      "volatility": "High",
+      "accent": "#ff485d",
+      "drops": [
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Specialist Gloves | Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat"
+      ]
+    },
+    {
+      "id": "aether",
+      "name": "Aether Protocol",
+      "type": "premium",
+      "code": "AE-140",
+      "price": 180,
+      "volatility": "High",
+      "accent": "#9d7cff",
+      "drops": [
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Karambit | Lore",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "M9 Bayonet | Crimson Web",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Specialist Gloves | Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary"
+      ]
+    },
+    {
+      "id": "myth-onyx",
+      "name": "Mythic Onyx",
+      "type": "mythic",
+      "code": "MY-001",
+      "price": 245,
+      "volatility": "Extreme",
+      "accent": "#f6c85f",
+      "drops": [
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Specialist Gloves | Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "Karambit | Lore",
+        "M9 Bayonet | Crimson Web",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir"
+      ]
+    },
+    {
+      "id": "dragon-rite",
+      "name": "Dragon Rite",
+      "type": "mythic",
+      "code": "MY-014",
+      "price": 280,
+      "volatility": "Extreme",
+      "accent": "#ff8a4d",
+      "drops": [
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "Specialist Gloves | Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "Karambit | Lore",
+        "M9 Bayonet | Crimson Web",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir"
+      ]
+    },
+    {
+      "id": "stellar-case",
+      "name": "Stellar Case",
+      "type": "mythic",
+      "code": "MY-027",
+      "price": 225,
+      "volatility": "Extreme",
+      "accent": "#8ae8ff",
+      "drops": [
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "Specialist Gloves | Fade",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "Karambit | Lore",
+        "M9 Bayonet | Crimson Web",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "P2000 | Granite Marbleized",
+        "Nova | Clear Polymer",
+        "M4A1-S | Basilisk",
+        "Five-SeveN | Capillary",
+        "AWP | Atheris",
+        "USP-S | Blueprint"
+      ]
+    },
+    {
+      "id": "relic-zero",
+      "name": "Relic Zero",
+      "type": "mythic",
+      "code": "MY-040",
+      "price": 255,
+      "volatility": "Extreme",
+      "accent": "#d8ff6a",
+      "drops": [
+        "Desert Eagle | Blaze",
+        "AK-47 | Fire Serpent",
+        "Sport Gloves | Pandora's Box",
+        "AWP | Gungnir",
+        "AK-47 | Wild Lotus",
+        "Butterfly Knife | Fade",
+        "M4A4 | Howl",
+        "AWP | Dragon Lore",
+        "Talon Knife | Marble Fade",
+        "Specialist Gloves | Fade",
+        "Karambit | Lore",
+        "M9 Bayonet | Crimson Web",
+        "AK-47 | Neon Rider",
+        "M4A4 | Cyber Security",
+        "AWP | Hyper Beast",
+        "Glock-18 | Vogue",
+        "USP-S | Kill Confirmed",
+        "SSG 08 | Dragonfire",
+        "AK-47 | Inheritance",
+        "Sport Gloves | Bronze Morph",
+        "USP-S | Orion",
+        "M4A1-S | Knight",
+        "AUG | Momentum",
+        "MAC-10 | Disco Tech",
+        "M4A4 | The Emperor",
+        "MP9 | Modest Threat",
+        "AK-47 | Asiimov",
+        "AWP | Neo-Noir"
+      ]
+    }
+  ]
+}
