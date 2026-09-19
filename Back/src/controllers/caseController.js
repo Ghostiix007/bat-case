@@ -98,7 +98,7 @@ const openCase = async (req, res) => {
         }
 
         const result = await prisma.$transaction(async (tx) => {
-            const updateUser = await tx.user.update({
+            const updatedUser = await tx.user.update({
                 where: {id: userId},
                 data: isFreeCase ? {freeCaseUsed: true} : {balance: {decrement: totalPrice}}
             })
@@ -169,7 +169,7 @@ const createCase = async (req, res) => {
             return res.status(400).json({ message: "Name and price are required" })
         }
 
-        const newCase = await prisma.create({
+        const newCase = await prisma.case.create({
             data: {
                 name: name,
                 price : parseFloat(price),
