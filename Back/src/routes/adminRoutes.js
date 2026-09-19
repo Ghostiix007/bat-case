@@ -7,6 +7,10 @@ const adminMiddleware = require("../middleware/adminMiddleware.js");
 
 router.post("/login", adminLogin);
 
+router.get("/analytics", authMiddleware, (req, res) => {
+  res.json({ analytics: {} });
+});
+
 router.get("/users", authMiddleware, adminMiddleware, getUsers);
 router.patch("/users/:id", authMiddleware, adminMiddleware, updateUserBalance);
 router.patch("/cases/:id", authMiddleware, adminMiddleware, updateCasePrice);
@@ -15,4 +19,3 @@ router.delete("/cases/:id/drops", authMiddleware, adminMiddleware, removeDropFro
 router.post("/skins", authMiddleware, adminMiddleware, createSkin);
 
 module.exports = router;
-
